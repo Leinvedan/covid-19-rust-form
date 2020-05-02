@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Dados de SEO, preencher quando já tiver tudo confirmado -->
+    <title>Formulário COVID-19</title>
+    <meta name="description" content="Formulário para ajudar na construção do mapa COVID-19">
+    <meta name="keywords" content="COVID-19,formulário"> 
+    <link rel="canonical" href="http://127.0.0.1:5500/index.html" />
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+  </head>
+  <body>
+    <form>
+
+        <div id="sintomas-1">
+            <label for="localizacao"> CEP: </label><br>
+            <input type="number" id="localizacao" name="localizacao" value=""><br>
+
+            <label for="Residentes"> Número de residentes: </label><br>
+            <input type="number" id="Residentes" name="Residentes" value=""><br>
+
+            <input type="checkbox" id="sintoma1" name="sintoma1" value="febre">
+            <label for="sintoma1"> Febre </label><br>
+
+            <input type="checkbox" id="sintoma2" name="sintoma2" value="Coriza">
+            <label for="sintoma2"> Coriza </label><br>
+
+            <input type="checkbox" id="sintoma3" name="sintoma3" value="Coriza">
+            <label for="sintoma3"> Tosse </label><br>
+
+            <input type="checkbox" id="sintoma4" name="sintoma4" value="Coriza">
+            <label for="sintoma4"> Diarréia </label><br>
+
+            <input type="checkbox" id="sintoma5" name="sintoma5" value="Coriza">
+            <label for="sintoma5"> Nausea e vômito </label><br>
+
+            <input type="checkbox" id="sintoma6" name="sintoma6" value="Coriza">
+            <label for="sintoma6"> Calafrios </label><br>
+
+            <input type="checkbox" id="sintoma7" name="sintoma7" value="Coriza">
+            <label for="sintoma7"> Tremores </label><br>
+        </div>
+
+        <div id="sintomas-2">
+            <input type="checkbox" id="sintoma8" name="sintoma8" value="Coriza">
+            <label for="sintoma8"> Dores no corpo </label><br>
+
+            <input type="checkbox" id="sintoma9" name="sintoma9" value="Coriza">
+            <label for="sintoma9"> Dor de cabeça </label><br>
+
+            <input type="checkbox" id="sintoma10" name="sintoma10" value="Coriza">
+            <label for="sintoma10"> Cansaço </label><br>
+
+            <input type="checkbox" id="sintoma11" name="sintoma11" value="Coriza">
+            <label for="sintoma11"> Perda de olfato </label><br>
+
+            <input type="checkbox" id="sintoma12" name="sintoma12" value="Coriza">
+            <label for="sintoma12"> Perda de paladar </label><br>
+
+            <input type="checkbox" id="sintoma13" name="sintoma13" value="Coriza">
+            <label for="sintoma13"> Dor de garganta </label><br>
+
+            <input type="checkbox" id="sintoma14" name="sintoma14" value="Coriza">
+            <label for="sintoma14"> Dificuldade de respirar </label><br>
+        </div>
+
+      <p> O diganóstico de que houve COVID nessa residência: </p><br>
+
+      <input type="radio" id="diagnostico1" name="diagnostico" value="teste">
+      <label for="diagnostico1"> Teste </label><br>
+
+      <input type="radio" id="diagnostico2" name="diagnostico" value="clinico">
+      <label for="diagnostico2"> Clínico, realizado por um médico </label><br>
+  
+      <input type="radio" id="diagnostico3" name="diagnostico" value="autodiagnostico">
+      <label for="diagnostico3"> Autodiagnóstico </label><br>
+
+
+      <div class="g-recaptcha" data-sitekey="(your-site-key)"></div>
+      <input type="button" onclick="checkRecaptcha();" value="submit"></input>
+
+    </form>
+
+    <script> 
+    function checkRecaptcha() {
+      var response = grecaptcha.getResponse();
+      if(response.length == 0) { 
+        //reCaptcha not verified
+        alert("no pass"); 
+      }
+      else { 
+        //reCaptch verified
+        alert("pass"); 
+      }
+    }
+    </script>
+
+  </body>
+</html>
