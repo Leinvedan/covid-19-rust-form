@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server": "node index.js",
     "build": "gulp",
     "watch": "gulp watch"
   },
@@ -17,7 +18,9 @@
     "url": "https://github.com/Leinvedan/covid-form/issues"
   },
   "homepage": "https://github.com/Leinvedan/covid-form#readme",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1"
+  },
   "devDependencies": {
     "gulp": "^4.0.2",
     "gulp-clean-css": "^4.3.0",
