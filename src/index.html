@@ -36,21 +36,30 @@
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
                   <fieldset>
+                    <div id="cep-spinner" class="hide-spinner">
+                      <div class="lds-ring">
+                        <div></div><div></div><div></div><div></div>
+                      </div>
+                    </div>
                     <legend> Localização </legend>
                     <label for="cep">CEP</label>
                     <input id="cep" type="text" placeholder="01001000" required />
 
+                    <p>Os dados de Localização abaixo serão 
+                      preenchidos automaticamente através do CEP informado
+                    </p>
+
                     <label for="logradouro">Logradouro</label>
-                    <input id="logradouro" type="text" required readonly/>
+                    <input id="logradouro" type="text" disabled/>
 
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="text" required readonly/>
+                    <input id="bairro" type="text" disabled/>
 
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="text" required readonly/>
+                    <input id="cidade" type="text" disabled/>
 
                     <label for="uf">Estado</label>
-                    <select id="uf" readonly>
+                    <select id="uf" disabled>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
