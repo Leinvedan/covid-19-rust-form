@@ -35,6 +35,8 @@
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
+                  <fieldset>
+                    <legend> Localização </legend>
                     <label for="cep">CEP</label>
                     <input id="cep" type="text" placeholder="01001000" required />
 
@@ -77,73 +79,76 @@
                         <option value="SE">Sergipe</option>
                         <option value="TO">Tocantins</option>
                     </select>
-                </div>
-                <!-- Sintomas -->
-                <div id="area-sintomas-1" class="form-control">
-
                     <label for="Residentes"> Número de residentes: </label><br>
                     <input type="number" id="Residentes" name="Residentes" value=""><br>
-
-                    <input type="checkbox" id="sintoma1" name="sintoma1" value="febre">
-                    <label for="sintoma1"> Febre </label><br>
-
-                    <input type="checkbox" id="sintoma2" name="sintoma2" value="Coriza">
-                    <label for="sintoma2"> Coriza </label><br>
-
-                    <input type="checkbox" id="sintoma3" name="sintoma3" value="Coriza">
-                    <label for="sintoma3"> Tosse </label><br>
-
-                    <input type="checkbox" id="sintoma4" name="sintoma4" value="Coriza">
-                    <label for="sintoma4"> Diarréia </label><br>
-
-                    <input type="checkbox" id="sintoma5" name="sintoma5" value="Coriza">
-                    <label for="sintoma5"> Nausea e vômito </label><br>
-
-                    <input type="checkbox" id="sintoma6" name="sintoma6" value="Coriza">
-                    <label for="sintoma6"> Calafrios </label><br>
-
-                    <input type="checkbox" id="sintoma7" name="sintoma7" value="Coriza">
-                    <label for="sintoma7"> Tremores </label><br>
+                  </fieldset>
                 </div>
 
-                <div id="area-sintomas-2" class="form-control">
-                    <input type="checkbox" id="sintoma8" name="sintoma8" value="Coriza">
-                    <label for="sintoma8"> Dores no corpo </label><br>
+                <fieldset>
+                  <legend> Sintomas </legend>
+                  <div id="area-sintomas-1" class="form-control">
 
-                    <input type="checkbox" id="sintoma9" name="sintoma9" value="Coriza">
-                    <label for="sintoma9"> Dor de cabeça </label><br>
+                      <input type="checkbox" id="sintoma1" name="sintoma1" value="febre">
+                      <label for="sintoma1"> Febre </label><br>
 
-                    <input type="checkbox" id="sintoma10" name="sintoma10" value="Coriza">
-                    <label for="sintoma10"> Cansaço </label><br>
+                      <input type="checkbox" id="sintoma2" name="sintoma2" value="Coriza">
+                      <label for="sintoma2"> Coriza </label><br>
 
-                    <input type="checkbox" id="sintoma11" name="sintoma11" value="Coriza">
-                    <label for="sintoma11"> Perda de olfato </label><br>
+                      <input type="checkbox" id="sintoma3" name="sintoma3" value="Coriza">
+                      <label for="sintoma3"> Tosse </label><br>
 
-                    <input type="checkbox" id="sintoma12" name="sintoma12" value="Coriza">
-                    <label for="sintoma12"> Perda de paladar </label><br>
+                      <input type="checkbox" id="sintoma4" name="sintoma4" value="Coriza">
+                      <label for="sintoma4"> Diarréia </label><br>
 
-                    <input type="checkbox" id="sintoma13" name="sintoma13" value="Coriza">
-                    <label for="sintoma13"> Dor de garganta </label><br>
+                      <input type="checkbox" id="sintoma5" name="sintoma5" value="Coriza">
+                      <label for="sintoma5"> Nausea e vômito </label><br>
 
-                    <input type="checkbox" id="sintoma14" name="sintoma14" value="Coriza">
-                    <label for="sintoma14"> Dificuldade de respirar </label><br>
-                </div>
+                      <input type="checkbox" id="sintoma6" name="sintoma6" value="Coriza">
+                      <label for="sintoma6"> Calafrios </label><br>
 
-                <!-- Diagnostico -->
-                <p> O diganóstico de que houve COVID nessa residência: </p>
+                      <input type="checkbox" id="sintoma7" name="sintoma7" value="Coriza">
+                      <label for="sintoma7"> Tremores </label><br>
+                  </div>
+
+                  <div id="area-sintomas-2" class="form-control">
+                      <input type="checkbox" id="sintoma8" name="sintoma8" value="Coriza">
+                      <label for="sintoma8"> Dores no corpo </label><br>
+
+                      <input type="checkbox" id="sintoma9" name="sintoma9" value="Coriza">
+                      <label for="sintoma9"> Dor de cabeça </label><br>
+
+                      <input type="checkbox" id="sintoma10" name="sintoma10" value="Coriza">
+                      <label for="sintoma10"> Cansaço </label><br>
+
+                      <input type="checkbox" id="sintoma11" name="sintoma11" value="Coriza">
+                      <label for="sintoma11"> Perda de olfato </label><br>
+
+                      <input type="checkbox" id="sintoma12" name="sintoma12" value="Coriza">
+                      <label for="sintoma12"> Perda de paladar </label><br>
+
+                      <input type="checkbox" id="sintoma13" name="sintoma13" value="Coriza">
+                      <label for="sintoma13"> Dor de garganta </label><br>
+
+                      <input type="checkbox" id="sintoma14" name="sintoma14" value="Coriza">
+                      <label for="sintoma14"> Dificuldade de respirar </label><br>
+                  </div>
+                </fieldset>
+
                 <div id="area-diagnostico" class="form-control">
-                    <input type="radio" id="diagnostico1" name="diagnostico" value="teste">
-                    <label for="diagnostico1"> Teste </label><br>
+                    <fieldset>
+                      <legend> O diganóstico de que houve COVID nessa residência foi através de </legend>
+                      <input type="radio" id="diagnostico1" name="diagnostico" value="teste">
+                      <label for="diagnostico1"> Teste </label><br>
 
-                    <input type="radio" id="diagnostico2" name="diagnostico" value="clinico">
-                    <label for="diagnostico2"> Clínico, realizado por um médico </label><br>
+                      <input type="radio" id="diagnostico2" name="diagnostico" value="clinico">
+                      <label for="diagnostico2"> Clínico, realizado por um médico </label><br>
 
-                    <input type="radio" id="diagnostico3" name="diagnostico" value="autodiagnostico">
-                    <label for="diagnostico3"> Autodiagnóstico </label><br>
-
-
+                      <input type="radio" id="diagnostico3" name="diagnostico" value="autodiagnostico">
+                      <label for="diagnostico3"> Autodiagnóstico </label><br>
+                    </fieldset>
                 </div>
-                <div class="g-recaptcha" data-sitekey="(your-site-key)"></div>
+                <label for="captcha"> Captcha </label>
+                <div class="g-recaptcha" data-sitekey="(your-site-key)" name="captcha"></div>
                 <div class="align-center submit-button-container">
                     <input type="button"
                         onclick="checkRecaptcha();"

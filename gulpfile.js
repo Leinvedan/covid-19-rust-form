@@ -28,3 +28,4 @@ function minify_js () {
 };
 
 exports.default = gulp.series(minify_html, minify_css, minify_js);
+exports.watch = () => {gulp.watch(SOURCE, gulp.series(minify_html, minify_css, minify_js))};
