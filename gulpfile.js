@@ -1,6 +1,7 @@
 const gulp = require('gulp');
 const htmlmin = require('gulp-htmlmin');
 const cleanCSS = require('gulp-clean-css');
+const concat = require('gulp-concat');
 const minify = require('gulp-minify');
 
 const DEST_DIR = "./dist";
@@ -16,6 +17,7 @@ function minify_html() {
 function minify_css() {
   return gulp.src(`${SOURCE}/css/*.css`)
     .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(concat('style.min.css'))
     .pipe(gulp.dest(DEST_DIR));
 };
 

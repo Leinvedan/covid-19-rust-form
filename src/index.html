@@ -10,8 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="https://unpkg.com/mustard-ui@latest/dist/css/mustard-ui.min.css">
-    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" type="text/css" href="./style.min.css">
 
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script src='./index-min.js' async defer></script>
@@ -40,16 +39,16 @@
                     <input id="cep" type="text" placeholder="01001000" required />
 
                     <label for="logradouro">Logradouro</label>
-                    <input id="logradouro" type="text" required />
+                    <input id="logradouro" type="text" required readonly/>
 
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="text" required />
+                    <input id="bairro" type="text" required readonly/>
 
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="text" required />
+                    <input id="cidade" type="text" required readonly/>
 
                     <label for="uf">Estado</label>
-                    <select id="uf">
+                    <select id="uf" readonly>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
