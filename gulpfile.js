@@ -21,7 +21,7 @@ function minify_css() {
 
 function minify_js () {
   return gulp.src(`${SOURCE}/js/*.js`)
-    .pipe(minify())
+    .pipe(minify({noSource: true}))
     .pipe(gulp.dest(DEST_DIR))
 };
 
