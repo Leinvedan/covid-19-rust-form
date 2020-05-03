@@ -43,7 +43,8 @@
                     </div>
                     <legend> Localização </legend>
                     <label for="cep">CEP</label>
-                    <input id="cep" type="number" placeholder="01001000" required />
+                    <input id="cep" type="number" placeholder="12345678" maxlength="8" required />
+                    <p class="validation-error" id="cep-warning"></p>
 
                     <p>Os dados de Localização abaixo serão 
                       preenchidos automaticamente através do CEP informado
