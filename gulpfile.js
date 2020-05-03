@@ -21,11 +21,18 @@ function minify_css() {
     .pipe(gulp.dest(DEST_DIR));
 };
 
+function minify_css_critical() {
+  return gulp.src(`${SOURCE}/css/critical/*.css`)
+    .pipe(cleanCSS({compatibility: 'ie8'}))
+    .pipe(concat('critical.min.css'))
+    .pipe(gulp.dest(DEST_DIR));
+};
+
 function minify_js () {
   return gulp.src(`${SOURCE}/js/*.js`)
     .pipe(minify({noSource: true}))
     .pipe(gulp.dest(DEST_DIR))
 };
 
-exports.default = gulp.series(minify_html, minify_css, minify_js);
-exports.watch = () => {gulp.watch(SOURCE, gulp.series(minify_html, minify_css, minify_js))};
+exports.default = gulp.parallel(minify_html, minify_css, minify_js);
+exports.watch = () => {gulp.watch(SOURCE, gulp.parallel(minify_html, minify_css, minify_js, minify_css_critical))};
