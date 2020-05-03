@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt">
   <head>
     <!-- Dados de SEO, preencher quando já tiver tudo confirmado -->
     <title>Formulário COVID-19</title>
@@ -11,9 +11,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="./style.min.css">
-
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
     <script src='./index-min.js' async defer></script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
   </head>
   <body>
 
@@ -30,18 +29,18 @@
     </header>
 
     <section id="covid-form-container">  
-
+        <h2>Pesquisa COVID-19</h2>
         <form class="panel">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
                   <fieldset>
+                    <legend> Localização </legend>
                     <div id="cep-spinner" class="hide-spinner">
                       <div class="lds-ring">
                         <div></div><div></div><div></div><div></div>
                       </div>
                     </div>
-                    <legend> Localização </legend>
                     <label for="cep">CEP</label>
                     <input id="cep" type="number" placeholder="12345678" maxlength="8" required />
                     <p class="validation-error" id="cep-warning"></p>
