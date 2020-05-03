@@ -7,12 +7,17 @@
     <meta name="keywords" content="COVID-19,formulário"> 
     <link rel="canonical" href="http://127.0.0.1:5500/index.html" />
 
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <link rel="preconnect" href="https://www.google.com">
+    <link rel="dns-prefetch" href="https://www.google.com" />
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" type="text/css" href="./style.min.css">
-    <script src='./index-min.js' async defer></script>
-    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    <script src='./index-min.js' async></script>
   </head>
   <body>
 
@@ -30,7 +35,7 @@
 
     <section id="covid-form-container">  
         <h2>Pesquisa COVID-19</h2>
-        <form class="panel">
+        <form class="panel" id="covid-form">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
@@ -166,7 +171,6 @@
                     </input>
                 </div>
             </div>
-
         </form>
     </section>
   </body>

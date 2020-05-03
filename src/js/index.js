@@ -7,26 +7,15 @@ function scrollTo(element) {
 }
 
 
-function checkRecaptcha() {
-  var response = grecaptcha.getResponse();
-  if(response.length == 0) { 
-    //reCaptcha not verified
-    alert("no pass"); 
-  }
-  else { 
-    //reCaptch verified
-    alert("pass"); 
-  }
-}
-
-
 function showSpinner() {
   document.getElementById("cep-spinner").classList.remove("hide-spinner");
 }
 
+
 function hideSpinner() {
   document.getElementById("cep-spinner").classList.add("hide-spinner");
 }
+
 
 function debounce(callback, wait) {
   let timeout = null;
@@ -81,19 +70,36 @@ function callCepAPI(cepElement, warnElement) {
     });
 };
 
-
-function afterPageLoad() {
-  /* Button scroll event handler*/
+function addScriptToCTA() {
   document.getElementById("cta-button").addEventListener('click', () => {
     scrollTo(document.getElementById("covid-form-container"));
   });
+}
 
+function addCepHandler() {
   const cepElement = document.getElementById("cep");
   const warnElement = document.getElementById("cep-warning");
   const cepCallback = debounce(() => callCepAPI(cepElement, warnElement), 700);
   document.getElementById("cep").addEventListener('input', () => {
     cepCallback();
   });
+}
+
+function loadCaptcha() {
+  const tag = document.createElement("script");
+  tag.src = 'https://www.google.com/recaptcha/api.js';
+  document.getElementsByTagName("head")[0].appendChild(tag);
+}
+
+function afterPageLoad() {
+  addScriptToCTA();
+  addCepHandler();
+  loadCaptcha();
+}
+
+window.checkRecaptcha = function() {
+  //adicionar validação do captcha aqui
+  this.console.log('TUDO OK!!!');
 }
 
 window.onload = afterPageLoad;
