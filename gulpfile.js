@@ -34,5 +34,5 @@ function minify_js () {
     .pipe(gulp.dest(DEST_DIR))
 };
 
-exports.default = gulp.parallel(minify_html, minify_css, minify_js);
+exports.default = gulp.parallel(minify_html, minify_css, minify_js, minify_css_critical);
 exports.watch = () => {gulp.watch(SOURCE, gulp.parallel(minify_html, minify_css, minify_js, minify_css_critical))};
