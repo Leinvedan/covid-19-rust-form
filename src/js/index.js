@@ -86,15 +86,22 @@ function addCepHandler() {
 }
 
 function loadCaptcha() {
+  loadCaptcha = () => {};
   const tag = document.createElement("script");
   tag.src = 'https://www.google.com/recaptcha/api.js';
   document.getElementsByTagName("head")[0].appendChild(tag);
 }
 
+function onFormInteract(callback) {
+  const cepField = document.getElementById("cep");
+  cepField.onfocus = callback;
+}
+
+
 function afterPageLoad() {
   addScriptToCTA();
   addCepHandler();
-  loadCaptcha();
+  onFormInteract(loadCaptcha);
 }
 
 window.checkRecaptcha = function() {
