@@ -1,14 +1,64 @@
-use actix_web::{get, web, App, HttpServer, Responder};
+use std::env;
+use actix_web::{get, web, App, HttpServer, Responder, middleware, client::Client};
+use serde::{Deserialize, Serialize};
 
-#[get("/{id}/{name}/index.html")]
-async fn index(info: web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {}! id:{}", info.1, info.0)
+
+
+#[derive(Debug, Deserialize, Serialize)]
+pub struct CaptchaResponse {
+    success: Option<bool>,
+    challenge_ts: Option<String>,
+    hostname: Option<String>,
+    error_codes: Option<Vec<i32>> 
+
 }
+
+#[derive(Serialize, Deserialize)]
+struct Body {
+    client_id: String,
+    client_secret: String,
+    code: String,
+    accept: String,
+}
+
+
+impl Body {
+    fn new(client_id: String, client_secret: String, code: String, accept: String) -> Self {
+        Body {
+            client_id,
+            client_secret,
+            code,
+            accept,
+        }
+    }
+}
+
+
+
+#[get("/validate/{token}")]
+async fn index(captcha_token: web::Path<String>) -> impl Responder {
+    let session_code = "session_code".to_string();
+    let app_secret = env::var("SECRET").unwrap();
+
+    let json_body = Body::new(captcha_token.to_string(), app_secret, session_code, String::from("json"));
+    let client = Client::default();
+
+    let mut res = client.post("https://www.google.com/recaptcha/api/siteverify")
+        .send_json(&json_body)
+        .await
+        .unwrap();
+    format!("{:?}", res.json::<CaptchaResponse>().await.unwrap())
+}
+
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().service(index))
-        .bind("127.0.0.1:8080")?
-        .run()
-        .await
+    std::env::set_var("RUST_LOG", "actix_web=info");
+    HttpServer::new(|| {App::new()
+        .wrap(middleware::Logger::default())
+        .service(index)
+    })
+    .bind("127.0.0.1:8080")?
+    .run()
+    .await
 }
