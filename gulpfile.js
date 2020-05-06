@@ -16,15 +16,15 @@ function minify_html() {
 
 function minify_css() {
   return gulp.src(`${SOURCE}/css/*.css`)
-    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(concat('style.min.css'))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest(DEST_DIR));
 };
 
 function minify_css_critical() {
   return gulp.src(`${SOURCE}/css/critical/*.css`)
-    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(concat('critical.min.css'))
+    .pipe(cleanCSS({compatibility: 'ie8'}))
     .pipe(gulp.dest(DEST_DIR));
 };
 
