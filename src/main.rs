@@ -10,10 +10,9 @@ pub struct CaptchaResponse {
     challenge_ts: Option<String>,
     hostname: Option<String>,
     error_codes: Option<Vec<i32>> 
-
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(Debug, Serialize, Deserialize)]
 struct Body {
     client_id: String,
     client_secret: String,
@@ -33,22 +32,37 @@ impl Body {
     }
 }
 
+#[derive(Debug, Deserialize, Serialize)]
+pub struct TestResponse {
+    json: Body
+}
 
+// https://www.google.com/recaptcha/api/siteverify
 
 #[get("/validate/{token}")]
 async fn index(captcha_token: web::Path<String>) -> impl Responder {
-    let session_code = "session_code".to_string();
-    let app_secret = env::var("SECRET").unwrap();
+    let session_code: String = "session_code".to_string();
+    //let app_secret = env::var("SECRET").unwrap();
+    let app_secret: String = "asdasdwosamsoafma4324das2234".to_string();
 
     let json_body = Body::new(captcha_token.to_string(), app_secret, session_code, String::from("json"));
     let client = Client::default();
 
-    let mut res = client.post("https://www.google.com/recaptcha/api/siteverify")
+    let res = client.post("https://postman-echo.com/post")
         .send_json(&json_body)
-        .await
-        .unwrap();
-    format!("{:?}", res.json::<CaptchaResponse>().await.unwrap())
+        .await;
+    match res {
+        Ok(mut data) => {
+            let parsed = data.json::<TestResponse>().await;
+            match parsed {
+                Ok(parsed_data) => format!("{:?}", parsed_data),
+                Err(_) => "ERROR PARSING DATA!!!!".to_string()
+            }
+        }
+        Err(_) => "ERROR SENDING REQUEST".to_string()
+    }
 }
+    
 
 
 #[actix_rt::main]
