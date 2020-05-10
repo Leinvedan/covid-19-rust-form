@@ -1,5 +1,5 @@
-use std::env;
-use actix_web::{get, web, App, HttpServer, Responder, middleware, client::Client};
+// use std::env;
+use actix_web::{post, web, App, HttpServer, Responder, middleware, client::Client, HttpResponse};
 use serde::{Deserialize, Serialize};
 
 
@@ -37,38 +37,41 @@ pub struct TestResponse {
     json: Body
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+pub struct PostParameters {
+    captcha_token: String,
+}
+
 // https://www.google.com/recaptcha/api/siteverify
 
-#[get("/validate/{token}")]
-async fn index(captcha_token: web::Path<String>) -> impl Responder {
+#[post("/validate")]
+async fn index(params: web::Json<PostParameters>) -> impl Responder {
+    println!("received: {:?}", params);
+    let captcha_token: String = params.captcha_token.clone();
     let session_code: String = "session_code".to_string();
     //let app_secret = env::var("SECRET").unwrap();
     let app_secret: String = "asdasdwosamsoafma4324das2234".to_string();
 
-    let json_body = Body::new(captcha_token.to_string(), app_secret, session_code, String::from("json"));
+    let json_body = Body::new(captcha_token, app_secret, session_code, String::from("json"));
     let client = Client::default();
 
-    let res = client.post("https://postman-echo.com/post")
+    let response = client.post("https://postman-echo.com/post")
         .send_json(&json_body)
         .await;
-    match res {
-        Ok(mut data) => {
-            let parsed = data.json::<TestResponse>().await;
-            match parsed {
-                Ok(parsed_data) => format!("{:?}", parsed_data),
-                Err(_) => "ERROR PARSING DATA!!!!".to_string()
-            }
+    if let Ok(mut data) = response {
+        if let Ok(parsed_data) = data.json::<TestResponse>().await {
+            // validate
+            return HttpResponse::Ok().json(parsed_data);
         }
-        Err(_) => "ERROR SENDING REQUEST".to_string()
     }
+    HttpResponse::InternalServerError().body("500 Internal error")
 }
-    
 
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
     std::env::set_var("RUST_LOG", "actix_web=info");
-    HttpServer::new(|| {App::new()
+    HttpServer::new(|| { App::new()
         .wrap(middleware::Logger::default())
         .service(index)
     })
