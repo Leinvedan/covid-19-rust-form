@@ -1,4 +1,4 @@
-const CAPTCHA_KEY = "jbdpbdasodwi124";
+const CAPTCHA_KEY = "secretCaptcha";
 const WAIT_CAPTCHA_OBJECT = 800; // ms
 const WAIT_INSERT_CAPTCHA = 1000 //ms;
 
@@ -100,16 +100,21 @@ function loadCaptchaScript() {
   waitAndLoadCaptchaObject();
 }
 
-
+// Problema de expiração
+// chamar no onsubmit mas cuidado com async do captcha
+// pode deixar o token vazio e soh preencher quando funcionar, depois rodar o submit na mão
+// https://stackoverflow.com/questions/60555844/how-to-run-async-validation-in-form-onsumbit/60555845#60555845
 function executeCaptchaObject() {
   window.grecaptcha.ready(function() {
     window.grecaptcha.execute(CAPTCHA_KEY, {action: 'homepage'}).then(function(token) {
-        console.log(`SENDING TOKEN ${token}`);
+        console.log(`UPDATING TOKEN: ${token}`);
+        const recaptchaResponse = document.getElementById('recaptchaResponse');
+        recaptchaResponse.value = token;
     });
   });
 }
 
-
+// TODO Talvez não precise disso se usar o onsubmit...
 function waitAndLoadCaptchaObject() {
   let tries = 0;
   const _waitAndLoad = function() {

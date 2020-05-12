@@ -30,7 +30,7 @@
 
     <section id="covid-form-container">  
         <h2>Pesquisa COVID-19</h2>
-        <form class="panel" id="covid-form" method="POST" action="/validate">
+        <form class="panel" id="covid-form"  method="POST" action="http://127.0.0.1:8080/validate" onsubmit="return executeCaptchaObject()">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
@@ -42,7 +42,7 @@
                       </div>
                     </div>
                     <label for="cep">CEP</label>
-                    <input id="cep" type="number" placeholder="12345678" maxlength="8" required />
+                    <input id="cep" type="number" name="cep" placeholder="12345678" maxlength="8" required />
                     <p class="validation-error" id="cep-warning"></p>
 
                     <p>Os dados de Localização abaixo serão 
@@ -89,7 +89,7 @@
                         <option value="TO">Tocantins</option>
                     </select>
                     <label for="Residentes"> Número de residentes: </label><br>
-                    <input type="number" id="Residentes" name="Residentes" value=""><br>
+                    <input type="number" id="Residentes" name="residentes" value=""><br>
                   </fieldset>
                 </div>
 
@@ -97,49 +97,49 @@
                   <legend> Sintomas </legend>
                   <div id="area-sintomas-1" class="form-control">
 
-                      <input type="checkbox" id="sintoma1" name="sintoma1" value="febre">
-                      <label for="sintoma1"> Febre </label><br>
+                      <input type="checkbox" id="Febre" name="sintomas" value="Febre">
+                      <label for="Febre"> Febre </label><br>
 
-                      <input type="checkbox" id="sintoma2" name="sintoma2" value="Coriza">
-                      <label for="sintoma2"> Coriza </label><br>
+                      <input type="checkbox" id="Coriza" name="sintomas" value="Coriza">
+                      <label for="Coriza"> Coriza </label><br>
 
-                      <input type="checkbox" id="sintoma3" name="sintoma3" value="Coriza">
-                      <label for="sintoma3"> Tosse </label><br>
+                      <input type="checkbox" id="Tosse" name="sintomas" value="Tosse">
+                      <label for="Tosse"> Tosse </label><br>
 
-                      <input type="checkbox" id="sintoma4" name="sintoma4" value="Coriza">
-                      <label for="sintoma4"> Diarréia </label><br>
+                      <input type="checkbox" id="Diarreia" name="sintomas" value="Diarreia">
+                      <label for="Diarreia"> Diarréia </label><br>
 
-                      <input type="checkbox" id="sintoma5" name="sintoma5" value="Coriza">
-                      <label for="sintoma5"> Nausea e vômito </label><br>
+                      <input type="checkbox" id="NauseaEVomito" name="sintomas" value="NauseaEVomito">
+                      <label for="NauseaEVomito"> Nausea e vômito </label><br>
 
-                      <input type="checkbox" id="sintoma6" name="sintoma6" value="Coriza">
-                      <label for="sintoma6"> Calafrios </label><br>
+                      <input type="checkbox" id="Calafrios" name="sintomas" value="Calafrios">
+                      <label for="Calafrios"> Calafrios </label><br>
 
-                      <input type="checkbox" id="sintoma7" name="sintoma7" value="Coriza">
-                      <label for="sintoma7"> Tremores </label><br>
+                      <input type="checkbox" id="Tremores" name="sintomas" value="Tremores">
+                      <label for="Tremores"> Tremores </label><br>
                   </div>
 
                   <div id="area-sintomas-2" class="form-control">
-                      <input type="checkbox" id="sintoma8" name="sintoma8" value="Coriza">
-                      <label for="sintoma8"> Dores no corpo </label><br>
+                      <input type="checkbox" id="DoresNocorpo" name="sintomas" value="DoresNocorpo">
+                      <label for="DoresNocorpo"> Dores no corpo </label><br>
 
-                      <input type="checkbox" id="sintoma9" name="sintoma9" value="Coriza">
-                      <label for="sintoma9"> Dor de cabeça </label><br>
+                      <input type="checkbox" id="DorDeCabeca" name="sintomas" value="DorDeCabeca">
+                      <label for="DorDeCabeca"> Dor de cabeça </label><br>
 
-                      <input type="checkbox" id="sintoma10" name="sintoma10" value="Coriza">
-                      <label for="sintoma10"> Cansaço </label><br>
+                      <input type="checkbox" id="Cansaco" name="sintomas" value="Cansaco">
+                      <label for="Cansaco"> Cansaço </label><br>
 
-                      <input type="checkbox" id="sintoma11" name="sintoma11" value="Coriza">
-                      <label for="sintoma11"> Perda de olfato </label><br>
+                      <input type="checkbox" id="PerdaDeOlfato" name="sintomas" value="PerdaDeOlfato">
+                      <label for="PerdaDeOlfato"> Perda de olfato </label><br>
 
-                      <input type="checkbox" id="sintoma12" name="sintoma12" value="Coriza">
-                      <label for="sintoma12"> Perda de paladar </label><br>
+                      <input type="checkbox" id="PerdaDePaladar" name="sintomas" value="PerdaDePaladar">
+                      <label for="PerdaDePaladar"> Perda de paladar </label><br>
 
-                      <input type="checkbox" id="sintoma13" name="sintoma13" value="Coriza">
-                      <label for="sintoma13"> Dor de garganta </label><br>
+                      <input type="checkbox" id="DorDeGarganta" name="sintomas" value="DorDeGarganta">
+                      <label for="DorDeGarganta"> Dor de garganta </label><br>
 
-                      <input type="checkbox" id="sintoma14" name="sintoma14" value="Coriza">
-                      <label for="sintoma14"> Dificuldade de respirar </label><br>
+                      <input type="checkbox" id="DificuldadeDeRespirar" name="sintomas" value="DificuldadeDeRespirar">
+                      <label for="DificuldadeDeRespirar"> Dificuldade de respirar </label><br>
                   </div>
                 </fieldset>
 
@@ -156,7 +156,7 @@
                       <label for="diagnostico3"> Autodiagnóstico </label><br>
                     </fieldset>
                 </div>
-                <label for="captcha"> Captcha </label>
+                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                 <div class="align-center submit-button-container">
                     <input type="submit"
                         value="Enviar"
