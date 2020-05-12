@@ -1,3 +1,7 @@
+const CAPTCHA_KEY = "jbdpbdasodwi124";
+const WAIT_CAPTCHA_OBJECT = 800; // ms
+const WAIT_INSERT_CAPTCHA = 1000 //ms;
+
 function scrollTo(element) {
   window.scroll({
       behavior: 'smooth',
@@ -70,11 +74,13 @@ function callCepAPI(cepElement, warnElement) {
     });
 };
 
+
 function addScriptToCTA() {
   document.getElementById("cta-button").addEventListener('click', () => {
     scrollTo(document.getElementById("covid-form-container"));
   });
 }
+
 
 function addCepHandler() {
   const cepElement = document.getElementById("cep");
@@ -85,28 +91,44 @@ function addCepHandler() {
   });
 }
 
-function loadCaptcha() {
-  loadCaptcha = () => {};
+
+function loadCaptchaScript() {
+  loadCaptchaScript = () => {};
   const tag = document.createElement("script");
-  tag.src = 'https://www.google.com/recaptcha/api.js';
+  tag.src = `https://www.google.com/recaptcha/api.js?render=${CAPTCHA_KEY}`;
   document.getElementsByTagName("head")[0].appendChild(tag);
+  waitAndLoadCaptchaObject();
 }
 
-function onFormInteract(callback) {
-  const cepField = document.getElementById("cep");
-  cepField.onfocus = callback;
+
+function executeCaptchaObject() {
+  window.grecaptcha.ready(function() {
+    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'homepage'}).then(function(token) {
+        console.log(`SENDING TOKEN ${token}`);
+    });
+  });
+}
+
+
+function waitAndLoadCaptchaObject() {
+  let tries = 0;
+  const _waitAndLoad = function() {
+    if (tries < 5) {
+      if (window.grecaptcha) {
+        executeCaptchaObject();
+      } else {
+        setTimeout(() => {waitAndLoadCaptchaObject(tries + 1)}, WAIT_CAPTCHA_OBJECT);
+      }
+    }
+  }
+  _waitAndLoad();
 }
 
 
 function afterPageLoad() {
   addScriptToCTA();
   addCepHandler();
-  onFormInteract(loadCaptcha);
-}
-
-window.checkRecaptcha = function() {
-  //adicionar validação do captcha aqui
-  this.console.log('TUDO OK!!!');
+  setTimeout(() => { loadCaptchaScript() }, WAIT_INSERT_CAPTCHA);
 }
 
 window.onload = afterPageLoad;

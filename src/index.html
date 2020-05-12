@@ -30,7 +30,7 @@
 
     <section id="covid-form-container">  
         <h2>Pesquisa COVID-19</h2>
-        <form class="panel" id="covid-form">
+        <form class="panel" id="covid-form" method="POST" action="/validate">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
@@ -157,10 +157,8 @@
                     </fieldset>
                 </div>
                 <label for="captcha"> Captcha </label>
-                <div class="g-recaptcha" data-sitekey="(your-site-key)" name="captcha"></div>
                 <div class="align-center submit-button-container">
-                    <input type="button"
-                        onclick="checkRecaptcha();"
+                    <input type="submit"
                         value="Enviar"
                         class="button-primary button-round button-large">
                     </input>
