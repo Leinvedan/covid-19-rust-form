@@ -1,5 +1,5 @@
 // use std::env;
-use actix_web::{post, web, App, HttpServer, Responder, middleware, client::Client, HttpResponse};
+use actix_web::{post, web, App, HttpServer, middleware, client::Client, HttpResponse};
 use serde::{Deserialize, Serialize};
 
 
@@ -7,59 +7,53 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Deserialize, Serialize)]
 pub struct CaptchaResponse {
     success: Option<bool>,
+    score: Option<i32>,
+    action: Option<String>,
     challenge_ts: Option<String>,
     hostname: Option<String>,
-    error_codes: Option<Vec<i32>> 
+    error_codes: Option<Vec<i32>>
 }
 
 #[derive(Debug, Serialize, Deserialize)]
 struct Body {
-    client_id: String,
-    client_secret: String,
-    code: String,
-    accept: String,
+    secret: String,
+    response: String,
 }
 
 
 impl Body {
-    fn new(client_id: String, client_secret: String, code: String, accept: String) -> Self {
+    fn new(secret: String, response: String) -> Self {
         Body {
-            client_id,
-            client_secret,
-            code,
-            accept,
+            secret,
+            response
         }
     }
 }
 
-#[derive(Debug, Deserialize, Serialize)]
-pub struct TestResponse {
-    json: Body
-}
-
 #[derive(Serialize, Deserialize, Debug)]
 pub struct PostParameters {
-    captcha_token: String,
+    cep: String,
+    residentes: Option<i32>,
+    sintomas: Option<Vec<String>>,
+    diagnostico: Option<String>,
+    recaptcha_response: String
 }
 
-// https://www.google.com/recaptcha/api/siteverify
 
 #[post("/validate")]
-async fn index(params: web::Json<PostParameters>) -> impl Responder {
+async fn index(params: web::Form<PostParameters>) -> HttpResponse {
     println!("received: {:?}", params);
-    let captcha_token: String = params.captcha_token.clone();
-    let session_code: String = "session_code".to_string();
-    //let app_secret = env::var("SECRET").unwrap();
-    let app_secret: String = "asdasdwosamsoafma4324das2234".to_string();
+    let recaptcha_response: String = params.recaptcha_response.clone();
+    let app_secret: String = "myLittleSecret".to_string();
 
-    let json_body = Body::new(captcha_token, app_secret, session_code, String::from("json"));
+    let json_body = Body::new(app_secret, recaptcha_response);
     let client = Client::default();
 
-    let response = client.post("https://postman-echo.com/post")
+    let response = client.post("https://www.google.com/recaptcha/api/siteverify")
         .send_json(&json_body)
         .await;
     if let Ok(mut data) = response {
-        if let Ok(parsed_data) = data.json::<TestResponse>().await {
+        if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
             // validate
             return HttpResponse::Ok().json(parsed_data);
         }

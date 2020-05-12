@@ -5,5 +5,5 @@ Receives a captcha token from frontend, validate on Google Captcha endpoint and 
 ### Example POST request
 
 ```bash
-curl -d '{"captcha_token":"ndasofi3ohfna"}' -H "Content-Type: application/json" -X POST http://127.0.0.1:8080/validate
+curl -d "cep=5354351&residentes=1&diagnostico=teste&recaptcha_response=03AGddagsdgja" -X POST http://localhost:8080/validate
 ```
