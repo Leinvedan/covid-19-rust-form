@@ -50,16 +50,16 @@
                     </p>
 
                     <label for="logradouro">Logradouro</label>
-                    <input id="logradouro" type="text" disabled/>
+                    <input id="logradouro" type="text" name="logradouro" required/>
 
                     <label for="bairro">Bairro</label>
-                    <input id="bairro" type="text" disabled/>
+                    <input id="bairro" type="text" name="bairro" required/>
 
                     <label for="cidade">Cidade</label>
-                    <input id="cidade" type="text" disabled/>
+                    <input id="cidade" type="text" name="cidade" required/>
 
                     <label for="uf">Estado</label>
-                    <select id="uf" disabled>
+                    <select id="uf" name="estado" required>
                         <option value="AC">Acre</option>
                         <option value="AL">Alagoas</option>
                         <option value="AP">Amapá</option>
@@ -97,48 +97,48 @@
                   <legend> Sintomas </legend>
                   <div id="area-sintomas-1" class="form-control">
 
-                      <input type="checkbox" id="Febre" name="sintomas" value="Febre">
+                      <input type="checkbox" id="Febre" name="sintomas[]" value="Febre">
                       <label for="Febre"> Febre </label><br>
 
-                      <input type="checkbox" id="Coriza" name="sintomas" value="Coriza">
+                      <input type="checkbox" id="Coriza" name="sintomas[]" value="Coriza">
                       <label for="Coriza"> Coriza </label><br>
 
-                      <input type="checkbox" id="Tosse" name="sintomas" value="Tosse">
+                      <input type="checkbox" id="Tosse" name="sintomas[]" value="Tosse">
                       <label for="Tosse"> Tosse </label><br>
 
-                      <input type="checkbox" id="Diarreia" name="sintomas" value="Diarreia">
+                      <input type="checkbox" id="Diarreia" name="sintomas[]" value="Diarreia">
                       <label for="Diarreia"> Diarréia </label><br>
 
-                      <input type="checkbox" id="NauseaEVomito" name="sintomas" value="NauseaEVomito">
+                      <input type="checkbox" id="NauseaEVomito" name="sintomas[]" value="NauseaEVomito">
                       <label for="NauseaEVomito"> Nausea e vômito </label><br>
 
-                      <input type="checkbox" id="Calafrios" name="sintomas" value="Calafrios">
+                      <input type="checkbox" id="Calafrios" name="sintomas[]" value="Calafrios">
                       <label for="Calafrios"> Calafrios </label><br>
 
-                      <input type="checkbox" id="Tremores" name="sintomas" value="Tremores">
+                      <input type="checkbox" id="Tremores" name="sintomas[]" value="Tremores">
                       <label for="Tremores"> Tremores </label><br>
                   </div>
 
                   <div id="area-sintomas-2" class="form-control">
-                      <input type="checkbox" id="DoresNocorpo" name="sintomas" value="DoresNocorpo">
+                      <input type="checkbox" id="DoresNocorpo" name="sintomas[]" value="DoresNocorpo">
                       <label for="DoresNocorpo"> Dores no corpo </label><br>
 
-                      <input type="checkbox" id="DorDeCabeca" name="sintomas" value="DorDeCabeca">
+                      <input type="checkbox" id="DorDeCabeca" name="sintomas[]" value="DorDeCabeca">
                       <label for="DorDeCabeca"> Dor de cabeça </label><br>
 
-                      <input type="checkbox" id="Cansaco" name="sintomas" value="Cansaco">
+                      <input type="checkbox" id="Cansaco" name="sintomas[]" value="Cansaco">
                       <label for="Cansaco"> Cansaço </label><br>
 
-                      <input type="checkbox" id="PerdaDeOlfato" name="sintomas" value="PerdaDeOlfato">
+                      <input type="checkbox" id="PerdaDeOlfato" name="sintomas[]" value="PerdaDeOlfato">
                       <label for="PerdaDeOlfato"> Perda de olfato </label><br>
 
-                      <input type="checkbox" id="PerdaDePaladar" name="sintomas" value="PerdaDePaladar">
+                      <input type="checkbox" id="PerdaDePaladar" name="sintomas[]" value="PerdaDePaladar">
                       <label for="PerdaDePaladar"> Perda de paladar </label><br>
 
-                      <input type="checkbox" id="DorDeGarganta" name="sintomas" value="DorDeGarganta">
+                      <input type="checkbox" id="DorDeGarganta" name="sintomas[]" value="DorDeGarganta">
                       <label for="DorDeGarganta"> Dor de garganta </label><br>
 
-                      <input type="checkbox" id="DificuldadeDeRespirar" name="sintomas" value="DificuldadeDeRespirar">
+                      <input type="checkbox" id="DificuldadeDeRespirar" name="sintomas[]" value="DificuldadeDeRespirar">
                       <label for="DificuldadeDeRespirar"> Dificuldade de respirar </label><br>
                   </div>
                 </fieldset>
