@@ -1,6 +1,7 @@
 // use std::env;
-use actix_web::{post, web, App, HttpServer, middleware, client::Client, HttpResponse};
+use actix_web::{post, App, HttpServer, middleware, client::Client, HttpResponse};
 use serde::{Deserialize, Serialize};
+use serde_qs::Config;
 
 
 
@@ -31,8 +32,12 @@ impl Body {
 }
 
 #[derive(Serialize, Deserialize, Debug)]
-pub struct PostParameters {
+pub struct FormParameters {
     cep: String,
+    logradouro: Option<String>,
+    bairro: Option<String>,
+    cidade: Option<String>,
+    estado: Option<String>,
     residentes: Option<i32>,
     sintomas: Option<Vec<String>>,
     diagnostico: Option<String>,
@@ -41,21 +46,27 @@ pub struct PostParameters {
 
 
 #[post("/validate")]
-async fn index(params: web::Form<PostParameters>) -> HttpResponse {
-    println!("received: {:?}", params);
-    let recaptcha_response: String = params.recaptcha_response.clone();
-    let app_secret: String = "myLittleSecret".to_string();
+async fn index(payload: String) -> HttpResponse {
 
-    let json_body = Body::new(app_secret, recaptcha_response);
-    let client = Client::default();
+    let config = Config::new(10, false);
+    let deserialized_params: Result<FormParameters, _> = config.deserialize_str(&payload);
+    if let Ok(params) = deserialized_params {
 
-    let response = client.post("https://www.google.com/recaptcha/api/siteverify")
-        .send_json(&json_body)
-        .await;
-    if let Ok(mut data) = response {
-        if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
-            // validate
-            return HttpResponse::Ok().json(parsed_data);
+        println!("params: {:?}", params);
+        let recaptcha_response: String = params.recaptcha_response.clone();
+        let app_secret: String = "myLittleSecret".to_string();
+    
+        let json_body = Body::new(app_secret, recaptcha_response);
+        let client = Client::default();
+    
+        let response = client.post("https://www.google.com/recaptcha/api/siteverify")
+            .send_json(&json_body)
+            .await;
+        if let Ok(mut data) = response {
+            if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
+                // validate
+                return HttpResponse::Ok().json(parsed_data);
+            }
         }
     }
     HttpResponse::InternalServerError().body("500 Internal error")
