@@ -30,7 +30,7 @@
 
     <section id="covid-form-container">  
         <h2>Pesquisa COVID-19</h2>
-        <form class="panel" id="covid-form"  method="POST" action="http://127.0.0.1:8080/validate" onsubmit="return executeCaptchaObject()">
+        <form class="panel" id="covid-form"  method="POST" action="http://127.0.0.1:8080/validate">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
                 <div id="area-localizacao" class="form-control">
@@ -158,7 +158,9 @@
                 </div>
                 <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
                 <div class="align-center submit-button-container">
-                    <input type="submit"
+                    <input type="button"
+                        id="submit-button"
+                        onclick="getCaptchaTokenAndSubmit()"
                         value="Enviar"
                         class="button-primary button-round button-large">
                     </input>

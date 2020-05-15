@@ -1,4 +1,4 @@
-const CAPTCHA_KEY = "secretCaptcha";
+const CAPTCHA_KEY = "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI";
 const WAIT_CAPTCHA_OBJECT = 800; // ms
 const WAIT_INSERT_CAPTCHA = 1000 //ms;
 
@@ -97,38 +97,36 @@ function loadCaptchaScript() {
   const tag = document.createElement("script");
   tag.src = `https://www.google.com/recaptcha/api.js?render=${CAPTCHA_KEY}`;
   document.getElementsByTagName("head")[0].appendChild(tag);
-  waitAndLoadCaptchaObject();
+  waitCaptchaAndEnableSubmit();
 }
 
-// Problema de expiração
-// chamar no onsubmit mas cuidado com async do captcha
-// pode deixar o token vazio e soh preencher quando funcionar, depois rodar o submit na mão
-// https://stackoverflow.com/questions/60555844/how-to-run-async-validation-in-form-onsumbit/60555845#60555845
-function executeCaptchaObject() {
-  window.grecaptcha.ready(function() {
-    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'homepage'}).then(function(token) {
-        console.log(`UPDATING TOKEN: ${token}`);
-        const recaptchaResponse = document.getElementById('recaptchaResponse');
-        recaptchaResponse.value = token;
-    });
-  });
-}
 
-// TODO Talvez não precise disso se usar o onsubmit...
-function waitAndLoadCaptchaObject() {
+function waitCaptchaAndEnableSubmit() {
   let tries = 0;
   const _waitAndLoad = function() {
     if (tries < 5) {
       if (window.grecaptcha) {
-        executeCaptchaObject();
+        let button = document.getElementById("submit-button");
+        button.style.display = "inline-block";
       } else {
-        setTimeout(() => {waitAndLoadCaptchaObject(tries + 1)}, WAIT_CAPTCHA_OBJECT);
+        setTimeout(() => {waitCaptchaAndEnableSubmit(tries + 1)}, WAIT_CAPTCHA_OBJECT);
       }
     }
   }
   _waitAndLoad();
 }
 
+function getCaptchaTokenAndSubmit() {
+  let captchaEl = document.getElementById("recaptchaResponse");
+  let form = document.getElementById("covid-form");
+  window.grecaptcha.ready(function() {
+    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'homepage'}).then(function(token) {
+        console.log(`UPDATING TOKEN: ${token}`);
+        captchaEl.value = token;
+        form.submit();
+    });
+  });
+}
 
 function afterPageLoad() {
   addScriptToCTA();
