@@ -30,6 +30,7 @@ function minify_css_critical() {
 
 function minify_js () {
   return gulp.src(`${SOURCE}/js/*.js`)
+    .pipe(concat("index.js"))
     .pipe(minify({noSource: true}))
     .pipe(gulp.dest(DEST_DIR))
 };
