@@ -8,7 +8,7 @@ use serde_qs::Config;
 #[derive(Debug, Deserialize, Serialize)]
 pub struct CaptchaResponse {
     success: Option<bool>,
-    score: Option<i32>,
+    score: Option<f32>,
     action: Option<String>,
     challenge_ts: Option<String>,
     hostname: Option<String>,
@@ -52,22 +52,26 @@ async fn index(payload: String) -> HttpResponse {
     let deserialized_params: Result<FormParameters, _> = config.deserialize_str(&payload);
     if let Ok(params) = deserialized_params {
 
-        println!("params: {:?}", params);
+        println!("\n\nparams: {:?}", params);
         let recaptcha_response: String = params.recaptcha_response.clone();
-        let app_secret: String = "myLittleSecret".to_string();
-    
+        let app_secret: String = "MyLittleSecret".to_string();
+
         let json_body = Body::new(app_secret, recaptcha_response);
         let client = Client::default();
-    
-        let response = client.post("https://www.google.com/recaptcha/api/siteverify")
-            .send_json(&json_body)
-            .await;
-        if let Ok(mut data) = response {
-            if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
-                // validate
-                return HttpResponse::Ok().json(parsed_data);
+
+        if let Ok(request_client) = client
+            .post("https://www.google.com/recaptcha/api/siteverify")
+            .content_type("application/x-www-form-urlencoded")
+            .query(&json_body) {
+                let response = request_client.send().await;
+                if let Ok(mut data) = response {
+                    if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
+                        // validate
+                        println!("\nvalidated: {:?}", parsed_data);
+                        return HttpResponse::Ok().json(parsed_data);
+                    }
+                }
             }
-        }
     }
     HttpResponse::InternalServerError().body("500 Internal error")
 }
