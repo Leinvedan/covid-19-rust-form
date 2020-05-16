@@ -32,7 +32,7 @@ function getCaptchaTokenAndSubmit() {
   let captchaEl = document.getElementById("recaptchaResponse");
   let form = document.getElementById("covid-form");
   window.grecaptcha.ready(function() {
-    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'homepage'}).then(function(token) {
+    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'contact'}).then(function(token) {
         captchaEl.value = token;
         form.submit();
     });
