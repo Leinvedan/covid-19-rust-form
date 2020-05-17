@@ -75,6 +75,10 @@ async fn index(payload: String, data: web::Data<EnvData>) -> HttpResponse {
     HttpResponse::InternalServerError().body("500 Internal error")
 }
 
+struct EnvData {
+    captcha_secret: String,
+}
+
 fn build_env_data() -> EnvData {
     let captcha_secret = match env::var("CAPTCHA_SECRET") {
         Ok(secret) => secret,
@@ -83,10 +87,6 @@ fn build_env_data() -> EnvData {
     EnvData{
         captcha_secret
     }
-}
-
-struct EnvData {
-    captcha_secret: String,
 }
 
 
