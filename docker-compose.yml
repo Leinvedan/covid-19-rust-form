@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  rust:
+    image: covid-rust-container
+    ports:
+     - "8080:8080"
+    env_file: .env
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    restart: always
+    command: --init-file /data/application/init.sql
+    environment:
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - ./data:/var/lib/mysql
+      - ./init.sql:/data/application/init.sql
+volumes:
+  data:

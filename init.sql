@@ -1,0 +1,22 @@
+CREATE DATABASE IF NOT EXISTS covidForm;
+USE covidForm;
+
+CREATE TABLE IF NOT EXISTS pessoa (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    cep TEXT,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE IF NOT EXISTS sintomas (
+  portador INT UNSIGNED  NOT NULL, 
+  tosse BOOL DEFAULT NULL,
+  PRIMARY KEY (portador),
+  FOREIGN KEY (portador) REFERENCES pessoa (id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO pessoa(id, cep) VALUES
+  (2131, "224369202"),
+  (2132, "999992321b");
+ 
+INSERT INTO sintomas(portador, tosse) VALUES
+  (2131, True);

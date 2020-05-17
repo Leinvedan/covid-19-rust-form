@@ -1,6 +1,6 @@
 # Form API
 
-Receives a captcha token from frontend, validate on Google Captcha endpoint and returns response.
+Receives a captcha token from frontend, validate on Google Captcha endpoint and writes in the database.
 
 ### Example POST request
 
