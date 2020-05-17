@@ -1,5 +1,5 @@
-// use std::env;
-use actix_web::{post, App, HttpServer, middleware, client::Client, HttpResponse};
+use std::env;
+use actix_web::{post, App, HttpServer, middleware, client::Client, HttpResponse, web};
 use serde::{Deserialize, Serialize};
 use serde_qs::Config;
 
@@ -46,7 +46,7 @@ pub struct FormParameters {
 
 
 #[post("/validate")]
-async fn index(payload: String) -> HttpResponse {
+async fn index(payload: String, data: web::Data<EnvData>) -> HttpResponse {
 
     let config = Config::new(10, false);
     let deserialized_params: Result<FormParameters, _> = config.deserialize_str(&payload);
@@ -54,15 +54,14 @@ async fn index(payload: String) -> HttpResponse {
 
         println!("\n\nparams: {:?}", params);
         let recaptcha_response: String = params.recaptcha_response.clone();
-        let app_secret: String = "MyLittleSecret".to_string();
 
-        let json_body = Body::new(app_secret, recaptcha_response);
+        let request_body = Body::new(data.captcha_secret.clone(), recaptcha_response);
         let client = Client::default();
 
         if let Ok(request_client) = client
             .post("https://www.google.com/recaptcha/api/siteverify")
             .content_type("application/x-www-form-urlencoded")
-            .query(&json_body) {
+            .query(&request_body) {
                 let response = request_client.send().await;
                 if let Ok(mut data) = response {
                     if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
@@ -76,15 +75,39 @@ async fn index(payload: String) -> HttpResponse {
     HttpResponse::InternalServerError().body("500 Internal error")
 }
 
+fn build_env_data() -> EnvData {
+    let captcha_secret = match env::var("CAPTCHA_SECRET") {
+        Ok(secret) => secret,
+        Err(_e) => "myLittleSecret".to_string(),
+    };
+    EnvData{
+        captcha_secret
+    }
+}
+
+struct EnvData {
+    captcha_secret: String,
+}
+
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
+    let app_port = match env::var("PORT") {
+        Ok(port) => port,
+        Err(_e) => "8080".to_string(),
+    };
+    let addr = format!("0.0.0.0:{}", app_port);
+
+    
+    println!("Starting http server: {}", &addr);
+
     std::env::set_var("RUST_LOG", "actix_web=info");
     HttpServer::new(|| { App::new()
+        .data(build_env_data())
         .wrap(middleware::Logger::default())
         .service(index)
     })
-    .bind("127.0.0.1:8080")?
+    .bind(&addr)?
     .run()
     .await
 }
