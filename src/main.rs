@@ -1,50 +1,10 @@
 use std::env;
-use actix_web::{post, App, HttpServer, middleware, client::Client, HttpResponse, web};
-use serde::{Deserialize, Serialize};
+use actix_web::{ post, App, HttpServer, middleware, client::Client, HttpResponse, web };
 use serde_qs::Config;
-//use mysql::{PooledConn};
-//use covid_survey::database::{get_db_connection};
+use covid_survey::models::{ CaptchaResponse, Body, FormParameters, EnvData };
+//use mysql::{ PooledConn };
+//use covid_survey::database::{ get_db_connection };
 
-
-
-#[derive(Debug, Deserialize, Serialize)]
-pub struct CaptchaResponse {
-    success: Option<bool>,
-    score: Option<f32>,
-    action: Option<String>,
-    challenge_ts: Option<String>,
-    hostname: Option<String>,
-    error_codes: Option<Vec<i32>>
-}
-
-#[derive(Debug, Serialize, Deserialize)]
-struct Body {
-    secret: String,
-    response: String,
-}
-
-
-impl Body {
-    fn new(secret: String, response: String) -> Self {
-        Body {
-            secret,
-            response
-        }
-    }
-}
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct FormParameters {
-    cep: String,
-    logradouro: Option<String>,
-    bairro: Option<String>,
-    cidade: Option<String>,
-    estado: Option<String>,
-    residentes: Option<i32>,
-    sintomas: Option<Vec<String>>,
-    diagnostico: Option<String>,
-    recaptcha_response: String
-}
 
 
 #[post("/validate")]
@@ -78,10 +38,7 @@ async fn index(payload: String, data: web::Data<EnvData>) -> HttpResponse {
     HttpResponse::InternalServerError().body("500 Internal error")
 }
 
-struct EnvData {
-    captcha_secret: String,
-    //db_conn: PooledConn
-}
+
 
 fn build_env_data() -> EnvData {
     let default_secret = String::from("myLittleSecret");
