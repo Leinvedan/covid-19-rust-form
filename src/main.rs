@@ -2,6 +2,8 @@ use std::env;
 use actix_web::{post, App, HttpServer, middleware, client::Client, HttpResponse, web};
 use serde::{Deserialize, Serialize};
 use serde_qs::Config;
+//use mysql::{PooledConn};
+//use covid_survey::database::{get_db_connection};
 
 
 
@@ -66,6 +68,7 @@ async fn index(payload: String, data: web::Data<EnvData>) -> HttpResponse {
                 if let Ok(mut data) = response {
                     if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
                         // validate
+                        // check string and value constraints
                         println!("\nvalidated: {:?}", parsed_data);
                         return HttpResponse::Ok().json(parsed_data);
                     }
@@ -77,37 +80,33 @@ async fn index(payload: String, data: web::Data<EnvData>) -> HttpResponse {
 
 struct EnvData {
     captcha_secret: String,
+    //db_conn: PooledConn
 }
 
 fn build_env_data() -> EnvData {
-    let captcha_secret = match env::var("CAPTCHA_SECRET") {
-        Ok(secret) => secret,
-        Err(_e) => "myLittleSecret".to_string(),
-    };
-    EnvData{
-        captcha_secret
+    let default_secret = String::from("myLittleSecret");
+    let captcha_secret = env::var("CAPTCHA_SECRET").unwrap_or(default_secret);
+    //let db_conn = get_db_connection().unwrap();
+    EnvData {
+        captcha_secret,
+        //db_conn
     }
 }
 
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    let app_port = match env::var("PORT") {
-        Ok(port) => port,
-        Err(_e) => "8080".to_string(),
-    };
+    let default_port = String::from("8080");
+    let app_port = env::var("PORT").unwrap_or(default_port);
     let addr = format!("0.0.0.0:{}", app_port);
 
-    
-    println!("Starting http server: {}", &addr);
-
     std::env::set_var("RUST_LOG", "actix_web=info");
-    HttpServer::new(|| { App::new()
-        .data(build_env_data())
-        .wrap(middleware::Logger::default())
-        .service(index)
-    })
-    .bind(&addr)?
-    .run()
-    .await
+    let server = HttpServer::new(|| { App::new()
+            .data(build_env_data())
+            .wrap(middleware::Logger::default())
+            .service(index)
+        })
+        .bind(&addr)?;
+    println!("Starting http server: {}", &addr);
+    server.run().await
 }
