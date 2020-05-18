@@ -2,7 +2,7 @@ version: '2'
 
 services:
   rust:
-    image: covid-rust-container
+    image: form-api
     ports:
      - "8080:8080"
     env_file: .env
