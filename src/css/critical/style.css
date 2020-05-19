@@ -20,3 +20,26 @@
 html {
   scroll-behavior: smooth;
 }
+
+#uf {
+  pointer-events: none;
+  touch-action: none;
+}
+
+#dataSintoma {
+  width: auto;
+  margin-bottom: 20px;
+}
+
+legend {
+  color: black;
+  font-weight: bold;
+}
+
+p {
+  font-weight: normal;
+}
+
+.question {
+  font-weight: bold;
+}

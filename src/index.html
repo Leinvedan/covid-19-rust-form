@@ -22,7 +22,7 @@
              Este questionário se destina as informações que podem indicar os possíveis níveis de subnotificação dos casos da doença,
              <br>ajudando as ações de prevenção e promoção de saúde pelos órgãos governamentais.
         </h2>
-        <p class="disclaimer">Não pediremos nenhum dado pessoal.</p>
+        <p class="disclaimer">Levará aproximadamente 2 minutos</p>
         <button class="get-started button button-primary button-large" id="cta-button">Quero Ajudar!</button>
         
         <a class="scroll-down" href="#covid-form-container" title="Ir ao formulario"></a>
@@ -33,138 +33,192 @@
         <form class="panel" id="covid-form"  method="POST" action="http://127.0.0.1:8080/validate">
             <p class="h3 panel-head"><strong>Questionário</strong></p>
             <div class="covid-form-inner">
-                <div id="area-localizacao" class="form-control">
-                  <fieldset>
-                    <legend> Localização </legend>
-                    <div id="cep-spinner" class="hide-spinner">
-                      <div class="lds-ring">
-                        <div></div><div></div><div></div><div></div>
-                      </div>
-                    </div>
-                    <label for="cep">CEP</label>
-                    <input id="cep" type="number" name="cep" placeholder="12345678" maxlength="8" required />
-                    <p class="validation-error" id="cep-warning"></p>
-
-                    <p>Os dados de Localização abaixo serão 
-                      preenchidos automaticamente através do CEP informado
-                    </p>
-
-                    <label for="logradouro">Logradouro</label>
-                    <input id="logradouro" type="text" name="logradouro" required/>
-
-                    <label for="bairro">Bairro</label>
-                    <input id="bairro" type="text" name="bairro" required/>
-
-                    <label for="cidade">Cidade</label>
-                    <input id="cidade" type="text" name="cidade" required/>
-
-                    <label for="uf">Estado</label>
-                    <select id="uf" name="estado" required>
-                        <option value="AC">Acre</option>
-                        <option value="AL">Alagoas</option>
-                        <option value="AP">Amapá</option>
-                        <option value="AM">Amazonas</option>
-                        <option value="BA">Bahia</option>
-                        <option value="CE">Ceará</option>
-                        <option value="DF">Distrito Federal</option>
-                        <option value="ES">Espírito Santo</option>
-                        <option value="GO">Goiás</option>
-                        <option value="MA">Maranhão</option>
-                        <option value="MT">Mato Grosso</option>
-                        <option value="MS">Mato Grosso do Sul</option>
-                        <option value="MG">Minas Gerais</option>
-                        <option value="PA">Pará</option>
-                        <option value="PB">Paraíba</option>
-                        <option value="PR">Paraná</option>
-                        <option value="PE">Pernambuco</option>
-                        <option value="PI">Piauí</option>
-                        <option value="RJ">Rio de Janeiro</option>
-                        <option value="RN">Rio Grande do Norte</option>
-                        <option value="RS">Rio Grande do Sul</option>
-                        <option value="RO">Rondônia</option>
-                        <option value="RR">Roraima</option>
-                        <option value="SC">Santa Catarina</option>
-                        <option value="SP">São Paulo</option>
-                        <option value="SE">Sergipe</option>
-                        <option value="TO">Tocantins</option>
-                    </select>
-                    <label for="Residentes"> Número de residentes: </label><br>
-                    <input type="number" id="Residentes" name="residentes" value=""><br>
-                  </fieldset>
-                </div>
-
-                <fieldset>
-                  <legend> Sintomas </legend>
-                  <div id="area-sintomas-1" class="form-control">
-
-                      <input type="checkbox" id="Febre" name="sintomas[]" value="Febre">
-                      <label for="Febre"> Febre </label><br>
-
-                      <input type="checkbox" id="Coriza" name="sintomas[]" value="Coriza">
-                      <label for="Coriza"> Coriza </label><br>
-
-                      <input type="checkbox" id="Tosse" name="sintomas[]" value="Tosse">
-                      <label for="Tosse"> Tosse </label><br>
-
-                      <input type="checkbox" id="Diarreia" name="sintomas[]" value="Diarreia">
-                      <label for="Diarreia"> Diarréia </label><br>
-
-                      <input type="checkbox" id="NauseaEVomito" name="sintomas[]" value="NauseaEVomito">
-                      <label for="NauseaEVomito"> Nausea e vômito </label><br>
-
-                      <input type="checkbox" id="Calafrios" name="sintomas[]" value="Calafrios">
-                      <label for="Calafrios"> Calafrios </label><br>
-
-                      <input type="checkbox" id="Tremores" name="sintomas[]" value="Tremores">
-                      <label for="Tremores"> Tremores </label><br>
+              <fieldset>
+                <legend> Localização </legend>
+                <div id="cep-spinner" class="hide-spinner">
+                  <div class="lds-ring">
+                    <div></div><div></div><div></div><div></div>
                   </div>
-
-                  <div id="area-sintomas-2" class="form-control">
-                      <input type="checkbox" id="DoresNocorpo" name="sintomas[]" value="DoresNocorpo">
-                      <label for="DoresNocorpo"> Dores no corpo </label><br>
-
-                      <input type="checkbox" id="DorDeCabeca" name="sintomas[]" value="DorDeCabeca">
-                      <label for="DorDeCabeca"> Dor de cabeça </label><br>
-
-                      <input type="checkbox" id="Cansaco" name="sintomas[]" value="Cansaco">
-                      <label for="Cansaco"> Cansaço </label><br>
-
-                      <input type="checkbox" id="PerdaDeOlfato" name="sintomas[]" value="PerdaDeOlfato">
-                      <label for="PerdaDeOlfato"> Perda de olfato </label><br>
-
-                      <input type="checkbox" id="PerdaDePaladar" name="sintomas[]" value="PerdaDePaladar">
-                      <label for="PerdaDePaladar"> Perda de paladar </label><br>
-
-                      <input type="checkbox" id="DorDeGarganta" name="sintomas[]" value="DorDeGarganta">
-                      <label for="DorDeGarganta"> Dor de garganta </label><br>
-
-                      <input type="checkbox" id="DificuldadeDeRespirar" name="sintomas[]" value="DificuldadeDeRespirar">
-                      <label for="DificuldadeDeRespirar"> Dificuldade de respirar </label><br>
-                  </div>
-                </fieldset>
-
-                <div id="area-diagnostico" class="form-control">
-                    <fieldset>
-                      <legend> O diganóstico de que houve COVID nessa residência foi através de </legend>
-                      <input type="radio" id="diagnostico1" name="diagnostico" value="teste">
-                      <label for="diagnostico1"> Teste </label><br>
-
-                      <input type="radio" id="diagnostico2" name="diagnostico" value="clinico">
-                      <label for="diagnostico2"> Clínico, realizado por um médico </label><br>
-
-                      <input type="radio" id="diagnostico3" name="diagnostico" value="autodiagnostico">
-                      <label for="diagnostico3"> Autodiagnóstico </label><br>
-                    </fieldset>
                 </div>
-                <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
-                <div class="align-center submit-button-container">
-                    <input type="button"
-                        id="submit-button"
-                        onclick="getCaptchaTokenAndSubmit()"
-                        value="Enviar"
-                        class="button-primary button-round button-large">
-                    </input>
-                </div>
+                <label for="cep" class="question">CEP</label>
+                <input id="cep" type="number" name="cep" placeholder="12345678" maxlength="8" required />
+                <p class="validation-error" id="cep-warning"></p>
+
+                <p>Os dados de Localização abaixo serão 
+                  preenchidos automaticamente através do CEP informado
+                </p>
+
+                <label for="logradouro" class="question" >Logradouro</label>
+                <input id="logradouro" type="text" name="logradouro" readonly="readonly" maxlength="250" required/>
+                </br>
+
+                <label for="bairro" class="question" >Bairro</label>
+                <input id="bairro" type="text" name="bairro" readonly="readonly" maxlength="250" required/>
+                </br>
+
+                <label for="cidade" class="question" >Cidade</label>
+                <input id="cidade" type="text" name="cidade" readonly="readonly" maxlength="250" required/>
+                </br>
+
+                <label for="uf" class="question" >Estado</label>
+                <select id="uf" name="estado" readonly="readonly" required>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+                </select>
+              </fieldset>
+
+              <fieldset>
+                <legend> Dados demográficos </legend>
+                <label class="question"> Você trabalha na área de saúde? </label><br>
+                <input type="radio" id="trab_saude1" name="trab_saude" value="teste">
+                <label for="trab_saude1"> Sim </label>
+
+                <input type="radio" id="trab_saude2" name="trab_saude" value="clinico">
+                <label for="trab_saude2"> Não </label>
+                </br>
+
+                <label for="idade" class="question"> Idade (em anos) </label><br>
+                <input type="number" id="idade" name="idade" value="" required>
+                </br>
+
+                <label class="question" > Sexo: </label></br>
+                <input type="radio" id="sexoM" name="sexo" value="m">
+                <label for="sexoM">Masculino</label>
+                <input type="radio" id="sexoF" name="sexo" value="f">
+                <label for="sexoF">Feminino</label>
+                <input type="radio" id="sexoNSI" name="sexo" value="nsi">
+                <label for="sexoNSI">Prefiro não informar</label>
+
+              </fieldset>
+
+              <fieldset>
+                <legend> Sintomas </legend>
+
+                  <p class="question"> No último mês, você apresentou algum dos seguintes sintomas ?
+                    (Pode marcar mais de uma opção)
+                  </p><br>
+
+                  <input type="checkbox" id="Febre" name="sintomas[]" value="Febre">
+                  <label for="Febre"> Febre </label><br>
+
+                  <input type="checkbox" id="Tosse" name="sintomas[]" value="Tosse">
+                  <label for="Tosse"> Tosse </label><br>
+
+                  <input type="checkbox" id="Espirro" name="sintomas[]" value="Espirro">
+                  <label for="Espirro"> Espirro </label><br>
+
+                  <input type="checkbox" id="Coriza" name="sintomas[]" value="Coriza">
+                  <label for="Coriza"> Coriza </label><br>
+
+                  <input type="checkbox" id="DorDeGarganta" name="sintomas[]" value="DorDeGarganta">
+                  <label for="DorDeGarganta"> Dor de garganta </label><br>
+
+                  <input type="checkbox" id="DorDeCabeca" name="sintomas[]" value="DorDeCabeca">
+                  <label for="DorDeCabeca"> Dor de cabeça </label><br>
+
+                  <input type="checkbox" id="Enjoo" name="sintomas[]" value="Enjoo">
+                  <label for="Enjoo"> Enjôo </label><br>
+
+                  <input type="checkbox" id="DificuldadeDeRespirar" name="sintomas[]" value="DificuldadeDeRespirar">
+                  <label for="DificuldadeDeRespirar"> Dificuldade de respirar </label><br>
+
+                  <input type="checkbox" id="PerdaDePaladar" name="sintomas[]" value="PerdaDePaladar">
+                  <label for="PerdaDePaladar"> Perda do gosto (paladar) </label><br>
+
+                  <input type="checkbox" id="PerdaDeOlfato" name="sintomas[]" value="PerdaDeOlfato">
+                  <label for="PerdaDeOlfato"> Perda do cheiro (olfato) </label><br>
+
+                  <input type="checkbox" id="Diarreia" name="sintomas[]" value="Diarreia">
+                  <label for="Diarreia"> Diarréia </label><br>
+
+                  <input type="checkbox" id="DoresNocorpo" name="sintomas[]" value="DoresNocorpo">
+                  <label for="DoresNocorpo"> Dores no corpo </label><br>
+              </fieldset>
+
+              <fieldset>
+                <legend> Dados relacionados a contaminação </legend>
+
+                <label for="dataSintoma" class="question">
+                  Qual foi o dia de seu primeiro sintoma (mesmo que aproximado)?
+                </label>
+                <input type="date" id="dataSintoma" name="dataSintoma">
+
+                <label class="question" > No último mês, você foi atendido por um profissional da saúde? </label>
+                </br>
+                <input type="radio" id="atendimentoMesY" name="atendimentoMes" value="y" required>
+                <label for="atendimentoMesY">Sim</label>
+                <input type="radio" id="atendimentoMesN" name="atendimentoMes" value="n">
+                <label for="atendimentoMesN">Não</label>
+                <input type="radio" id="atendimentoMesNSI" name="atendimentoMes" value="nsi">
+                <label for="atendimentoMesNSI">Não sei informar</label>
+                </br></br>
+
+                <label class="question" > Você tem algum caso de parente ou amigo confirmado por teste que tem ou tiveram Covid-19? </label>
+                </br>
+                <input type="radio" id="parenteConfirmadoY" name="parenteConfirmado" value="y" required>
+                <label for="parenteConfirmadoY">Sim</label>
+                <input type="radio" id="parenteConfirmadoN" name="parenteConfirmado" value="n">
+                <label for="parenteConfirmadoN">Não</label>
+                <input type="radio" id="parenteConfirmadoNSI" name="parenteConfirmado" value="nsi">
+                <label for="parenteConfirmadoNSI">Não sei informar</label>
+                </br></br>
+
+                <label class="question" > Você tem algum caso suspeito (não testado) de parente ou amigo que morreram pela Covid-19? </label>
+                </br>
+                <input type="radio" id="casoSuspeitoY" name="casoSuspeito" value="y" required>
+                <label for="casoSuspeitoY">Sim</label>
+                <input type="radio" id="casoSuspeitoN" name="casoSuspeito" value="n">
+                <label for="casoSuspeitoN">Não</label>
+                <input type="radio" id="casoSuspeitoNSI" name="casoSuspeito" value="nsi">
+                <label for="casoSuspeitoNSI">Não sei informar</label>
+                </br></br>
+
+                <label class="question" > Você tem algum caso de parente ou amigo confirmado por teste que morreram pela Covid-19? </label>
+                </br>
+                <input type="radio" id="casoConfirmadoY" name="casoConfirmado" value="y" required>
+                <label for="casoConfirmadoY">Sim</label>
+                <input type="radio" id="casoConfirmadoN" name="casoConfirmado" value="n">
+                <label for="casoConfirmadoN">Não</label>
+                <input type="radio" id="casoConfirmadoNSI" name="casoConfirmado" value="nsi">
+                <label for="casoConfirmadoNSI">Não sei informar</label>
+                </br></br>
+
+              </fieldset>
+
+              <input type="hidden" name="recaptcha_response" id="recaptchaResponse">
+              <div class="align-center submit-button-container">
+                  <input type="button"
+                      id="submit-button"
+                      onclick="getCaptchaTokenAndSubmit()"
+                      value="Submeter"
+                      class="button-primary button-round button-large">
+                  </input>
+              </div>
             </div>
         </form>
     </section>
