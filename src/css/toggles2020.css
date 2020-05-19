@@ -1,11 +1,11 @@
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
   input[type=checkbox],
 input[type=radio] {
-    --active: #0080c6;
+    --active: #005D8F;
     --active-inner: #fff;
     --focus: 2px rgba(39, 94, 254, .3);
     --border: #BBC1E1;
-    --border-hover: #0080c6;
+    --border-hover: #005D8F;
     --background: #fff;
     --disabled: #F6F8FF;
     --disabled-inner: #E1E6F9;
