@@ -29,12 +29,18 @@ function waitCaptchaAndEnableSubmit() {
 
 
 function getCaptchaTokenAndSubmit() {
-  let captchaEl = document.getElementById("recaptchaResponse");
   let form = document.getElementById("covid-form");
-  window.grecaptcha.ready(function() {
-    window.grecaptcha.execute(CAPTCHA_KEY, {action: 'contact'}).then(function(token) {
-        captchaEl.value = token;
-        form.submit();
+  if (form.checkValidity()) {
+    let captchaEl = document.getElementById("recaptchaResponse");
+    window.grecaptcha.ready(function() {
+      window.grecaptcha.execute(CAPTCHA_KEY, {action: 'contact'}).then(function(token) {
+          captchaEl.value = token;
+          form.submit();
+      });
     });
-  });
+  }
+  else {
+    alert("Verifique se todos campos com * vermelho estão preenchidos");
+    return;
+  }
 }

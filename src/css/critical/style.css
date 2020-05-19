@@ -38,8 +38,29 @@ legend {
 
 p {
   font-weight: normal;
+  display: inline;
+}
+
+.red-icon {
+  color: red;
 }
 
 .question {
   font-weight: bold;
+  margin-right: 5px;
+}
+
+.title {
+  font-weight: bold !important;
+  color: white !important;
+}
+
+.subtitle {
+  font-weight: normal !important;
+  color: white !important;
+}
+
+.disclaimer {
+  font-size: 14px !important;
+  color: white !important;
 }

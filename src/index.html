@@ -17,12 +17,15 @@
   <body>
 
     <header>
-        <h1 class="title">Ajude no combate a COVID-19.</h1>
+        <h1 class="title">Ajude no combate a COVID-19!</h1>
         <h2 class="subtitle">
-             Este questionário se destina as informações que podem indicar os possíveis níveis de subnotificação dos casos da doença,
-             <br>ajudando as ações de prevenção e promoção de saúde pelos órgãos governamentais.
+          Este questionário tem o objetivo de indicar as subnotificações dos casos da doença, ajudando as ações de
+          <br>
+          prevenção e promoção de saúde pelos órgãos governamentais.
+          <br>
+          seu preenchimento é de livre escolha.
         </h2>
-        <p class="disclaimer">Levará aproximadamente 2 minutos</p>
+        <p class="disclaimer">Todas as informações são sigilosas e nenhum dado será divulgado de forma individual.</p>
         <button class="get-started button button-primary button-large" id="cta-button">Quero Ajudar!</button>
         
         <a class="scroll-down" href="#covid-form-container" title="Ir ao formulario"></a>
@@ -40,27 +43,29 @@
                     <div></div><div></div><div></div><div></div>
                   </div>
                 </div>
-                <label for="cep" class="question">CEP</label>
+                <label for="cep" class="question">CEP</label><p class="red-icon">*</p>
                 <input id="cep" type="number" name="cep" placeholder="12345678" maxlength="8" required />
                 <p class="validation-error" id="cep-warning"></p>
+                </br>
 
-                <p>Os dados de Localização abaixo serão 
+                <p>Os dados de localização abaixo serão 
                   preenchidos automaticamente através do CEP informado
                 </p>
+                </br></br>
 
-                <label for="logradouro" class="question" >Logradouro</label>
+                <label for="logradouro" class="question" >Logradouro</label><p class="red-icon">*</p>
                 <input id="logradouro" type="text" name="logradouro" readonly="readonly" maxlength="250" required/>
                 </br>
 
-                <label for="bairro" class="question" >Bairro</label>
+                <label for="bairro" class="question" >Bairro</label><p class="red-icon">*</p>
                 <input id="bairro" type="text" name="bairro" readonly="readonly" maxlength="250" required/>
                 </br>
 
-                <label for="cidade" class="question" >Cidade</label>
+                <label for="cidade" class="question" >Cidade</label><p class="red-icon">*</p>
                 <input id="cidade" type="text" name="cidade" readonly="readonly" maxlength="250" required/>
                 </br>
 
-                <label for="uf" class="question" >Estado</label>
+                <label for="uf" class="question" >Estado</label><p class="red-icon">*</p>
                 <select id="uf" name="estado" readonly="readonly" required>
                     <option value="AC">Acre</option>
                     <option value="AL">Alagoas</option>
@@ -100,9 +105,10 @@
 
                 <input type="radio" id="trab_saude2" name="trab_saude" value="clinico">
                 <label for="trab_saude2"> Não </label>
-                </br>
+                </br></br>
 
-                <label for="idade" class="question"> Idade (em anos) </label><br>
+                <label for="idade" class="question"> Idade (em anos) </label><p class="red-icon">*</p>
+                <br>
                 <input type="number" id="idade" name="idade" value="" required>
                 </br>
 
@@ -117,11 +123,11 @@
               </fieldset>
 
               <fieldset>
-                <legend> Sintomas </legend>
+                <legend> Sintomas (opcional) </legend>
 
                   <p class="question"> No último mês, você apresentou algum dos seguintes sintomas ?
                     (Pode marcar mais de uma opção)
-                  </p><br>
+                  </p><br></br>
 
                   <input type="checkbox" id="Febre" name="sintomas[]" value="Febre">
                   <label for="Febre"> Febre </label><br>
@@ -157,18 +163,20 @@
                   <label for="Diarreia"> Diarréia </label><br>
 
                   <input type="checkbox" id="DoresNocorpo" name="sintomas[]" value="DoresNocorpo">
-                  <label for="DoresNocorpo"> Dores no corpo </label><br>
+                  <label for="DoresNocorpo"> Dores no corpo </label><br><br>
+
+                  <label for="dataSintoma" class="question">
+                    Qual foi o dia de seu primeiro sintoma (mesmo que aproximado)?
+                  </label>
+                  <input type="date" id="dataSintoma" name="dataSintoma">
               </fieldset>
 
               <fieldset>
                 <legend> Dados relacionados a contaminação </legend>
 
-                <label for="dataSintoma" class="question">
-                  Qual foi o dia de seu primeiro sintoma (mesmo que aproximado)?
-                </label>
-                <input type="date" id="dataSintoma" name="dataSintoma">
-
-                <label class="question" > No último mês, você foi atendido por um profissional da saúde? </label>
+                <label class="question" >
+                  No último mês, você foi atendido por um profissional da saúde?
+                </label><p class="red-icon">*</p>
                 </br>
                 <input type="radio" id="atendimentoMesY" name="atendimentoMes" value="y" required>
                 <label for="atendimentoMesY">Sim</label>
@@ -178,7 +186,9 @@
                 <label for="atendimentoMesNSI">Não sei informar</label>
                 </br></br>
 
-                <label class="question" > Você tem algum caso de parente ou amigo confirmado por teste que tem ou tiveram Covid-19? </label>
+                <label class="question" >
+                  Você tem algum caso de parente ou amigo confirmado por teste que tem ou tiveram Covid-19?
+                </label><p class="red-icon">*</p>
                 </br>
                 <input type="radio" id="parenteConfirmadoY" name="parenteConfirmado" value="y" required>
                 <label for="parenteConfirmadoY">Sim</label>
@@ -188,7 +198,9 @@
                 <label for="parenteConfirmadoNSI">Não sei informar</label>
                 </br></br>
 
-                <label class="question" > Você tem algum caso suspeito (não testado) de parente ou amigo que morreram pela Covid-19? </label>
+                <label class="question" >
+                  Você tem algum caso suspeito (não testado) de parente ou amigo que morreram pela Covid-19?
+                </label><p class="red-icon">*</p>
                 </br>
                 <input type="radio" id="casoSuspeitoY" name="casoSuspeito" value="y" required>
                 <label for="casoSuspeitoY">Sim</label>
@@ -198,7 +210,9 @@
                 <label for="casoSuspeitoNSI">Não sei informar</label>
                 </br></br>
 
-                <label class="question" > Você tem algum caso de parente ou amigo confirmado por teste que morreram pela Covid-19? </label>
+                <label class="question" >
+                  Você tem algum caso de parente ou amigo confirmado por teste que morreram pela Covid-19?
+                </label><p class="red-icon">*</p>
                 </br>
                 <input type="radio" id="casoConfirmadoY" name="casoConfirmado" value="y" required>
                 <label for="casoConfirmadoY">Sim</label>
