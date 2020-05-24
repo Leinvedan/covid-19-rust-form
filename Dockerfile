@@ -23,4 +23,7 @@ FROM rust:1-slim-stretch
 # copy the build artifact from the build stage
 COPY --from=build /covid-survey/target/release/covid-survey .
 
+# lib not present in the image fix
+RUN apt-get update && apt-get install -y libmariadbclient18
+
 CMD ["./covid-survey"]
