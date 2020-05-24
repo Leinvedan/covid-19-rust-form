@@ -18,7 +18,6 @@ pub fn insert_form_data(conn: &MysqlConnection, data: FormParameters) -> bool {
 
   let new_form_data: NewFormData = NewFormData::from_form(data);
 
-  println!("Starting to write values");
   diesel::insert_into(pessoa)
         .values(&new_form_data)
         .execute(conn)
