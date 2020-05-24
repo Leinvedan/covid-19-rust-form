@@ -11,7 +11,7 @@ actix-web = { version = "2.0.0", features = ["openssl"] }
 actix-rt = "1"
 serde = { version = "1.0", features = ["derive"] }
 serde_qs = "0.5"
-mysql = "18.2.0"
+diesel = { version = "1.0.0", features = ["mysql"] }
 
 [profile.release]
 opt-level = 3
