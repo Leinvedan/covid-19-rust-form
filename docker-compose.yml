@@ -6,6 +6,7 @@ services:
     ports:
      - "8080:8080"
     env_file: .env
+    command: sh -c './wait-for.sh db:3306 -t 60 && ./covid-survey'
     depends_on:
       - db
   db:

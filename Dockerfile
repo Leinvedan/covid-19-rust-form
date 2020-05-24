@@ -24,6 +24,12 @@ FROM rust:1-slim-stretch
 COPY --from=build /covid-survey/target/release/covid-survey .
 
 # lib not present in the image fix
-RUN apt-get update && apt-get install -y libmariadbclient18
+RUN apt-get update && apt-get install -qy \
+  libmariadbclient18 \
+  netcat
+
+# Wait script
+COPY ./wait-for.sh ./wait-for.sh
+RUN chmod +x ./wait-for.sh
 
 CMD ["./covid-survey"]
