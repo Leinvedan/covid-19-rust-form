@@ -53,6 +53,6 @@ curl -d "cep=5354351&residentes=1&diagnostico=teste&recaptcha_response=03AGddags
 2. With array parameter
 
 ```bash
-curl -d "cep=22756501&logradouro=Rua+ABC&bairro=ttt&cidade=Rio+de+Janeiro&estado=RJ&residentes=7&sintomas%5B%5D=Febre&sintomas%5B%5D=Tosse&sintomas%5B%5D=NauseaEVomito&sintomas%5B%5D=PerdaDeOlfato&sintomas%5B%5D=PerdaDePaladar&diagnostico=teste&recaptcha_response=7f8sbewq" -X POST http://localhost:8080/validate
+curl -d "cep=22753501&logradouro=Rua+Bacu&bairro=Abc&cidade=Rio+de+Janeiro&estado=RJ&trabSaude=y&idade=23&sexo=m&sintomas%5B%5D=DorDeCabeca&sintomas%5B%5D=PerdaDePaladar&sintomas%5B%5D=Diarreia&dataSintoma=2020-05-13&atendimentoMes=y&parenteConfirmado=n&casoSuspeito=nsi&casoConfirmado=y&recaptcha_response=aoidhbiuaf8392" -X POST http://localhost:8080/validate
 ```
 
