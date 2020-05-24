@@ -1,5 +1,5 @@
 docker-build-rust:
-	docker build . -t covid-rust-container
+	docker build . -t form-api
 
 docker-run:
 	docker-compose up
