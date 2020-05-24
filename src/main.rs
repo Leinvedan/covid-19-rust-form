@@ -12,38 +12,45 @@ async fn index(payload: String, env_data: web::Data<EnvData>) -> HttpResponse {
 
     let config = Config::new(10, false);
     let deserialized_params: Result<FormParameters, _> = config.deserialize_str(&payload);
+    println!("payload={}", payload);
     if let Ok(deserialized_form) = deserialized_params {
 
         println!("\n\nparams: {:?}", deserialized_form);
-        //let recaptcha_response: String = deserialized_form.recaptcha_response.clone();
+        let recaptcha_response: String = deserialized_form.recaptcha_response.clone();
 
-        // TEMP!!!
-        let inserted: bool = insert_form_data(&env_data.db_conn, deserialized_form);
-        println!("INSETED? = {}", inserted);
-        // TEMP END!!!!
+        let request_body = Body::new(env_data.captcha_secret.clone(), recaptcha_response);
+        let client = Client::default();
 
-        //let request_body = Body::new(env_data.captcha_secret.clone(), recaptcha_response);
-        //let client = Client::default();
+        if let Ok(request_client) = client
+            .post("https://www.google.com/recaptcha/api/siteverify")
+            .content_type("application/x-www-form-urlencoded")
+            .query(&request_body)
+            {
+                let response = request_client.send().await;
+                println!("requestBody={:?}", request_body);
+                if let Ok(mut data) = response {
+                    if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
+                        println!("SCORE = {}", parsed_data.score.unwrap_or(0.0));
+                        println!("captchaData={:?}", parsed_data);
+                        if parsed_data.score.unwrap_or(0.0) >= 0.5 {
+                            let inserted: bool = insert_form_data(&env_data.db_conn, deserialized_form);
+                            println!("INSETED? = {}", inserted);
+                        }
 
-        // if let Ok(request_client) = client
-        //     .post("https://www.google.com/recaptcha/api/siteverify")
-        //     .content_type("application/x-www-form-urlencoded")
-        //     .query(&request_body) {
-        //         let response = request_client.send().await;
-        //         if let Ok(mut data) = response {
-        //             if let Ok(parsed_data) = data.json::<CaptchaResponse>().await {
-                        
-        //                 if parsed_data.score.unwrap_or(0.0) >= 0.5 {
-        //                     let inserted: bool = insert_form_data(&env_data.db_conn, deserialized_form);
-        //                     println!("INSETED? = {}", inserted);
-        //                 }
-
-        //                 return HttpResponse::Ok().body(
-        //                     "<h1>Obrigado por participar! Você foi fundamental no combate ao COVID-19!</h1>"
-        //                 );
-        //             }
-        //         }
-        //     }
+                        return HttpResponse::Ok().body(
+                            "<h1>Obrigado por participar!</br>Sua ajuda foi fundamental no combate ao COVID-19!</h1>"
+                        );
+                    } else {
+                        println!("Error parsing Google API Response");
+                    }
+                } else {
+                    println!("Error trying to POST Google API");
+                }
+            } else {
+                println!("Error parsing body to query");
+            }
+    } else {
+        println!("Unable do desserialize data");
     }
     HttpResponse::InternalServerError().body("500 Internal error")
 }
