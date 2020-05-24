@@ -17,13 +17,10 @@ CREATE TABLE IF NOT EXISTS pessoa (
     parenteConfirmado TEXT NOT NULL,
     casoSuspeito TEXT NOT NULL,
     casoConfirmado TEXT NOT NULL,
-    recaptcha_response TEXT NOT NULL,
     PRIMARY KEY (id)
 );
 
-INSERT INTO pessoa(
+INSERT INTO pessoa (
   id, cep, logradouro, bairro, cidade, estado, idade, sexo, sintomas,
-  atendimentoMes, parenteConfirmado, casoSuspeito, casoConfirmado,
-  recaptcha_response)
-VALUES
-  (2131, "224369202", "224369202", "224369202", "224369202", "224369202", 22, "224369202", 33, "224369202", "224369202", "224369202", "224369202", "224369202");
+  atendimentoMes, parenteConfirmado, casoSuspeito, casoConfirmado)
+VALUES (2131, "224369202", "rua x", "austin", "sp", "sp", 22, "M", 3324, "22-02-2020", "y", "n", "nsi");

@@ -15,6 +15,5 @@ table! {
       parenteConfirmado -> Text,
       casoSuspeito -> Text,
       casoConfirmado -> Text,
-      recaptcha_response -> Text,
   }
 }

@@ -98,8 +98,7 @@ impl NewFormData {
             atendimentoMes: form_param.atendimentoMes,
             parenteConfirmado: form_param.parenteConfirmado,
             casoSuspeito: form_param.casoSuspeito,
-            casoConfirmado: form_param.casoConfirmado,
-            recaptcha_response: form_param.recaptcha_response
+            casoConfirmado: form_param.casoConfirmado
         }
     }
 }
@@ -122,8 +121,7 @@ pub struct NewFormData {
     atendimentoMes: String,
     parenteConfirmado: String,
     casoSuspeito: String,
-    casoConfirmado: String,
-    recaptcha_response: String
+    casoConfirmado: String
 }
 
 
