@@ -1,3 +1,6 @@
 api/target
 /data
 .vscode
+
+node_modules
+dist

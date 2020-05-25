@@ -1,0 +1,66 @@
+#submit-button {
+  display: none;
+}
+
+.hide-spinner {
+  opacity: 0;
+}
+
+@media only screen and (min-width: 768px) {
+  #covid-form-container {
+    width: 70%;
+    margin: auto;
+  }
+
+  .covid-form-inner {
+    padding: 20px;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+#uf {
+  pointer-events: none;
+  touch-action: none;
+}
+
+#dataSintoma {
+  width: auto;
+  margin-bottom: 20px;
+}
+
+legend {
+  color: black;
+  font-weight: bold;
+}
+
+p {
+  font-weight: normal;
+  display: inline;
+}
+
+.red-icon {
+  color: red;
+}
+
+.question {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.title {
+  font-weight: bold !important;
+  color: white !important;
+}
+
+.subtitle {
+  font-weight: normal !important;
+  color: white !important;
+}
+
+.disclaimer {
+  font-size: 14px !important;
+  color: white !important;
+}
