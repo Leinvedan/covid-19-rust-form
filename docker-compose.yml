@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  rust:
+  api:
     image: form-api
     ports:
      - "8080:8080"
@@ -9,6 +9,13 @@ services:
     command: sh -c './wait-for.sh db:3306 -t 60 && ./covid-survey'
     depends_on:
       - db
+  client:
+    image: form-client
+    ports:
+      - "5500:5500"
+    command: sh -c 'npm run start'
+    depends_on:
+      - api
   db:
     image: mysql:5.7
     restart: always

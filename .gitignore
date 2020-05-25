@@ -1,3 +1,5 @@
-/target
-/data
+api/target
+client/node_modules
+client/dist
+data
 .vscode

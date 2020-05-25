@@ -1,0 +1,19 @@
+#cep-spinner {
+  position: absolute; 
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  width: 100px;
+  top: 0;
+  bottom: 0;
+  height: 100px;
+  margin: auto;
+}
+
+.submit-button-container {
+  margin-top: 35px;
+}
+.g-recaptcha {
+  align-self: center;
+}

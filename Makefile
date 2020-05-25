@@ -1,9 +1,14 @@
-docker-build-rust:
-	docker build . -t form-api
-
-docker-run:
+run:
 	docker-compose up
 
-# MYSQL_FULL_RESET -> delete the data directory and use this to rerun the init.sql script
-docker-down: 
+docker-build-all: docker-build-api docker-build-client
+	echo "Starting build"
+
+docker-build-api:
+	docker build ./api -t form-api
+
+docker-build-client:
+	docker build ./client -t form-client
+
+docker-down: # CLEAR DATABASE -> delete the data directory and use this to rerun the init.sql script
 	docker-compose down -v
