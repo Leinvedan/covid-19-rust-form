@@ -1,6 +1,7 @@
 # Client
 
-Includes an HTML Form with Google ReCaptcha V3. Needs the ReCaptcha client token in the `distribution index.js file`. To do this...
+Includes an HTML Form with Google ReCaptcha V3. Needs the ReCaptcha client token in the `distribution index.js file`.
+To do this: add your token to `CAPTCHA_KEY` inside the `src/captchaLogic.js` and build the static files using gulp.
 
 # API
 
