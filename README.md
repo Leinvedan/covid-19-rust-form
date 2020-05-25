@@ -1,4 +1,8 @@
-# Form API
+# Client
+
+Includes an HTML Form with Google ReCaptcha V3. Needs the ReCaptcha client token in the `distribution index.js file`. To do this...
+
+# API
 
 Receives a captcha token from frontend, validate on Google Captcha endpoint and writes in the database.
 
