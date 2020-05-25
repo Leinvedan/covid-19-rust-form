@@ -1,5 +1,8 @@
-docker-build-rust:
+docker-build-api:
 	docker build ./api -t form-api
+
+docker-build-client:
+	docker build ./client -t form-client
 
 docker-run:
 	docker-compose up

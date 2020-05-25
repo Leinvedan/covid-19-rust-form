@@ -1,6 +1,5 @@
 api/target
-/data
+client/node_modules
+client/dist
+data
 .vscode
-
-node_modules
-dist
