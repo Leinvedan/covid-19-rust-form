@@ -11,7 +11,7 @@
 # Running the project
 
 ## **BEFORE RUNNING THE PROJECT**
-This project the Google ReCaptcha V3 script to avoid bots. For the Client-API integration to work, you need to get yours domain keys [HERE](http://www.google.com/recaptcha/admin) and set:
+This project uses Google reCaptcha v3. Before running the project, you need to get your domain keys [HERE](http://www.google.com/recaptcha/admin) and set them:
 
  1. `.env` file -> Secret Key
 
@@ -21,7 +21,7 @@ This project the Google ReCaptcha V3 script to avoid bots. For the Client-API in
 
 ## *Quickstart*
 
-1. make sure you have docker and docker-compose installed.
+1. make sure docker and docker-compose are installed.
 
 2. run `make docker-build-all` and grab a cup of coffe, this will take long...
 
@@ -31,8 +31,8 @@ This project the Google ReCaptcha V3 script to avoid bots. For the Client-API in
 
 # Client
 
-Includes an HTML Form with Google ReCaptcha V3. Needs the ReCaptcha client token in the `distribution index.js file`.
-To do this: add your token to `CAPTCHA_KEY` inside the `src/js/captchaLogic.js` and build the static files using gulp or run `make docker-build-client` if using Docker.
+The client includes a HTML Form with Google reCaptcha v3. The ReCaptcha client token is in the `dist index.js file`.
+To update the token: add your token to `CAPTCHA_KEY` inside the `src/js/captchaLogic.js` and build the static files using gulp or run `make docker-build-client` if using Docker.
 
 ### Running locally (run the commands inside the client directory)
 
@@ -40,13 +40,13 @@ To do this: add your token to `CAPTCHA_KEY` inside the `src/js/captchaLogic.js` 
 
 2. run `npm install`
 
-3. run `npm run build` to build your static files into `/dist` (after that you can use `npm run watch` to automatically build your files as you change them)
+3. run `npm run build` to build your static files into `/dist` (after that, you can use `npm run watch` to automatically build your files as you change them)
 
 4. run `npm run start` to lauch the server at `http://127.0.0.1:5500/`
 
 # API
 
-Receives a captcha token from frontend, validate on Google Captcha endpoint and writes in the database.
+Receives a captcha token from the frontend, validate on Google reCaptcha endpoint and writes in the database.
 
 ## API Quickstart
 
@@ -60,7 +60,7 @@ Receives a captcha token from frontend, validate on Google Captcha endpoint and 
 
 #### Without Docker
 
-1. Make sure you have Rust installed and a MySQL database running
+1. Make sure Rust is installed and the MySQL database is running
 
 2. Export the environment variables, see [Environment variables](#environment-variables)
 
