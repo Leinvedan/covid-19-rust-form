@@ -23,11 +23,11 @@ This project uses Google reCaptcha v3. Before running the project, you need to g
 
 1. make sure docker and docker-compose are installed.
 
-2. run `make docker-build-all` and grab a cup of coffe, this will take long...
+2. run `make docker-build-all` and grab a cup of coffe, this will take some time...
 
 3. run `make run` and you're done!
 
-4. The Form client is working on `http://127.0.0.1:5500/` and your API can receive POST request on `http://127.0.0.1:8080/`
+4. The Form client is working on `http://127.0.0.1:5500/` and your API can receive POST request on `http://127.0.0.1:8080/validate`
 
 # Client
 
