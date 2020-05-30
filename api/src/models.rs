@@ -1,6 +1,5 @@
 use serde::{Deserialize, Serialize};
 use crate::schema::pessoa;
-use diesel::mysql::MysqlConnection;
 
 
 #[derive(Debug, Deserialize, Serialize)]
@@ -26,12 +25,6 @@ impl Body {
             response
         }
     }
-}
-
-
-pub struct EnvData {
-    pub captcha_secret: String,
-    pub db_conn: MysqlConnection
 }
 
 
